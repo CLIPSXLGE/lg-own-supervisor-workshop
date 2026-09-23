@@ -1771,30 +1771,32 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   #schedulePopupOverlay{ align-items:center; padding-top:0; }
   .schedule-banner{
-    position:relative; flex:none; height:230px; display:flex; flex-direction:column;
+    position:relative; flex:none; height:150px; display:flex; flex-direction:column;
     align-items:center; justify-content:center; text-align:center; padding:0 6vw;
     background:
       linear-gradient(180deg, rgba(6,6,7,0.45) 0%, rgba(6,6,7,0.6) 50%, rgba(6,6,7,0.95) 100%),
       var(--img-schedule-banner) center 25% / cover no-repeat;
   }
-  .schedule-sub{ margin-bottom:16px; font-size:14.5px; }
+  .schedule-sub{ margin-bottom:8px; font-size:13.5px; }
   .schedule-banner h2{
-    font-size:clamp(24px, 2.8vw, 34px); font-weight:900; color:#fff; line-height:1.4;
+    font-size:clamp(22px, 2.6vw, 30px); font-weight:900; color:#fff; line-height:1.3;
     text-shadow:0 3px 14px rgba(0,0,0,0.85), 0 1px 8px rgba(0,0,0,0.7);
   }
   .schedule-body{
-    flex:1; min-height:0; overflow-y:auto; background:#000;
-    padding:30px 5vw 40px;
+    flex:1; min-height:0; overflow-y:hidden; background:#000;
+    padding:8px 5vw 8px; display:flex; flex-direction:column;
   }
   .schedule-day-header{
-    display:flex; align-items:center; gap:16px; color:#fff; font-weight:900;
-    font-size:clamp(19px,2vw,24px); margin:0 0 16px; font-family:'Racing Sans One',sans-serif; letter-spacing:1px;
+    flex:none; display:flex; align-items:center; gap:16px; color:#fff; font-weight:900;
+    font-size:clamp(17px,1.8vw,21px); margin:0 0 6px; font-family:'Racing Sans One',sans-serif; letter-spacing:1px;
   }
-  .schedule-day-header:not(:first-child){ margin-top:34px; }
+  .schedule-day-header:not(:first-child){ margin-top:8px; }
   .schedule-day-header span{ flex:none; }
   .schedule-day-header::before, .schedule-day-header::after{ content:''; flex:1; height:2px; background:var(--red); }
-  .schedule-grid{ display:flex; flex-direction:column; gap:12px; }
-  .schedule-card{ perspective:1000px; height:58px; }
+  .schedule-grid{ display:flex; flex-direction:column; gap:6px; min-height:0; }
+  #scheduleDay1{ flex:7 1 0%; }
+  #scheduleDay2{ flex:4 1 0%; }
+  .schedule-card{ perspective:1000px; flex:1 1 0%; min-height:0; }
   .schedule-card-inner{
     position:relative; width:100%; height:100%; transition:transform .7s cubic-bezier(.4,.2,.2,1);
     transform-style:preserve-3d;
@@ -1976,6 +1978,8 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   .bm-dice-btn:hover{ background:#ff2b1c; }
   .bm-dice-stack{ display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .bm-dice-stack-row{ display:flex; align-items:center; gap:8px; }
+  .bm-dice-stack-row .bm-count-btn, .bm-dice-stack-row .bm-qr-btn{ margin-left:0; font-size:12px !important; padding:6px 16px !important; }
   .bm-undo-btn{
     background:rgba(255,255,255,0.1) !important; border:1.5px solid var(--line) !important;
     font-size:12px !important; padding:6px 16px !important;
@@ -1988,7 +1992,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
 
   .bm-board-frame{
-    width:100%; overflow:visible; margin-bottom:18px; flex:1; min-height:0;
+    width:100%; height:100%; overflow:visible;
     display:flex; align-items:center; justify-content:center; position:relative;
     background-image:
       radial-gradient(ellipse 90% 55% at 50% 4%, rgba(140,200,255,0.16) 0%, rgba(140,200,255,0) 60%),
@@ -2007,6 +2011,51 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   .bm-board-stage{ position:relative; width:1500px; height:950px; transform-origin:center center; flex:none; }
   .bm-board-stage svg{ position:absolute; inset:0; width:100%; height:100%; }
+
+  /* ---- 레이싱 현황 보드: 결승선 통과 시 최종 등수 발표 오버레이 ---- */
+  .bm-win-overlay{
+    position:absolute; inset:0; z-index:200; display:none;
+    align-items:center; justify-content:center; pointer-events:none;
+  }
+  .bm-win-overlay.show{ display:flex; }
+  .bm-win-board{
+    position:relative; z-index:210; pointer-events:auto;
+    background:rgba(8,8,10,0.96); border:4px solid var(--gold); border-radius:24px;
+    padding:32px 46px 36px; min-width:440px; max-width:600px; max-height:86%; overflow-y:auto;
+    box-shadow:0 0 100px rgba(212,175,55,0.7), 0 30px 90px rgba(0,0,0,0.8);
+    animation: rouletteWin .55s cubic-bezier(.2,.8,.3,1.3);
+    text-align:center;
+  }
+  .bm-win-board h3{
+    font-family:'Racing Sans One',sans-serif; font-size:32px; color:var(--gold);
+    margin:0 0 8px; letter-spacing:1px; text-shadow:0 2px 12px rgba(212,175,55,0.5);
+  }
+  .bm-win-board .bm-win-sub{ color:var(--gray); font-size:14px; margin-bottom:22px; line-height:1.5; }
+  .bm-win-row{
+    display:flex; align-items:center; gap:16px; padding:12px 10px;
+    border-top:1px solid rgba(255,255,255,0.12); border-radius:12px;
+  }
+  .bm-win-row:first-child{
+    border-top:none; background:linear-gradient(90deg, rgba(212,175,55,0.22), rgba(212,175,55,0.04));
+    box-shadow:0 0 0 1.5px rgba(212,175,55,0.5) inset;
+  }
+  .bm-win-rank{ font-family:'Racing Sans One',sans-serif; font-size:26px; width:52px; text-align:center; flex:none; color:#fff; }
+  .bm-win-row:first-child .bm-win-rank{ font-size:34px; }
+  .bm-win-face{
+    width:52px; height:52px; border-radius:50%; background-size:cover; background-position:center;
+    background-color:#222; border:2px solid var(--gold); flex:none;
+  }
+  .bm-win-car{
+    width:68px; height:48px; background-size:contain; background-repeat:no-repeat; background-position:center;
+    filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 6px #fff); flex:none;
+  }
+  .bm-win-name{ font-size:19px; font-weight:800; color:#fff; flex:1; text-align:left; }
+  .bm-win-close{
+    margin-top:24px; background:var(--red); color:#fff; border:none; border-radius:999px;
+    padding:13px 34px; font-family:'Racing Sans One',sans-serif; font-size:17px; cursor:pointer;
+    box-shadow:0 10px 24px -6px rgba(227,6,19,0.6);
+  }
+  .bm-win-close:hover{ background:#ff2030; }
   .bm-cell{
     position:absolute; width:80px; height:80px; margin-left:-40px; margin-top:-40px;
     border-radius:50%; background:#2a2a2e; border:2px solid #4a4a50;
@@ -2124,15 +2173,24 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     z-index:5; transition:left 1.2s ease-in-out, top 1.2s ease-in-out; text-align:center;
   }
   .bm-token.bm-stepping{ transition:left .34s ease, top .34s ease; }
+  .bm-token-signboard{
+    display:flex; align-items:center; gap:5px; width:max-content;
+    background:rgba(18,18,20,0.92); border:2px solid #fff; border-radius:9px;
+    padding:3px 9px 3px 3px; margin:0 auto 2px; box-shadow:0 6px 14px -4px rgba(0,0,0,0.6);
+  }
   .bm-team-face{
-    width:52px; height:52px; border-radius:50%; margin:0 auto 2px;
+    width:32px; height:32px; border-radius:50%; flex:none;
     background-size:cover; background-position:center 15%; background-color:#1a1a1c;
-    border:2.5px solid #fff; box-shadow:0 4px 10px rgba(0,0,0,0.5);
+    border:2px solid #fff; box-shadow:0 4px 10px rgba(0,0,0,0.5);
     animation: bmFaceWobble 2.4s ease-in-out infinite;
   }
   @keyframes bmFaceWobble{
     0%,100%{ transform:rotate(-9deg); }
     50%{ transform:rotate(9deg); }
+  }
+  .bm-token-name{
+    display:inline-block; padding:4px 10px; border-radius:6px;
+    color:#fff; font-weight:900; font-size:12px; white-space:nowrap; box-shadow:0 3px 8px rgba(0,0,0,0.4);
   }
   .bm-token .bm-car-photo{
     width:160px; height:118px; background-size:contain; background-repeat:no-repeat; background-position:center;
@@ -2144,13 +2202,6 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     0%,100%{ transform:translateY(0) rotate(-2deg); }
     50%{ transform:translateY(-7px) rotate(2deg); }
   }
-  .bm-token .bm-flag{ display:none; }
-  .bm-scoreboard{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:14px; }
-  .bm-score-chip{
-    display:flex; align-items:center; gap:8px; background:var(--black2); border:1px solid var(--line);
-    border-radius:999px; padding:8px 16px; font-size:14.5px; font-weight:700;
-  }
-  .bm-score-dot{ width:12px; height:12px; border-radius:50%; }
   .bm-log{
     display:none;
     max-height:130px; overflow-y:auto; background:rgba(20,20,22,0.9); border:1px solid var(--line);
@@ -2358,7 +2409,12 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   #bmGame{
     display:flex; flex-direction:column; height:100%; min-height:0;
-    perspective:1700px; perspective-origin:50% 8%;
+    position:relative;
+  }
+  .bm-board-viewport{
+    flex:1; min-height:0; width:100%; position:relative;
+    display:flex; align-items:flex-end; justify-content:center;
+    perspective:1700px; perspective-origin:50% 50%;
   }
   #bmGame .bm-game-top{ flex:none; }
   .pz-top{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:center; margin-bottom:32px; flex:none; }
@@ -3581,19 +3637,6 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   .tc-ice-btn-centered:hover{ transform:translate(-50%,-50%) scale(1.05); background:rgba(227,6,19,0.65); }
 
   .tc-stage{ position:relative; z-index:2; max-width:1300px; margin:0 auto; min-height:660px; }
-  .tc-team-video{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:16px;
-    box-shadow:0 20px 45px -14px rgba(0,0,0,0.7);
-    outline:none; -webkit-tap-highlight-color:transparent; border:none;
-  }
-  .tc-team-video:focus{ outline:none; }
-  .tc-team-video.mv-hidden{ display:none; }
-  .tc-video-dim{
-    position:absolute; inset:0; z-index:1; pointer-events:none; border-radius:16px;
-    background:linear-gradient(180deg, rgba(6,6,7,0) 0%, rgba(6,6,7,0.55) 55%, rgba(6,6,7,0.95) 100%);
-    opacity:0; transition:opacity .5s ease;
-  }
-  .tc-video-dim.show{ opacity:1; }
   #page-prep-blank1 .tc-page{ padding:28px 5vw 30px; display:flex; flex-direction:column; justify-content:center; }
   #page-prep-blank1 .tc-title{ margin-bottom:70px; }
   #page-prep-blank1 .tc-stage{ min-height:530px; }
@@ -5325,7 +5368,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   .rcc-video-overlay{
     position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg, rgba(6,6,7,0.15) 0%, rgba(6,6,7,0.85) 100%);
+    background:linear-gradient(180deg, rgba(6,6,7,0.12) 0%, rgba(6,6,7,0.55) 55%, rgba(6,6,7,0.95) 100%);
   }
   .rap-carousel-card > .rcc-badge,
   .rap-carousel-card > .rcc-title,
@@ -5503,15 +5546,19 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     position:absolute; z-index:9; display:flex; flex-direction:column; align-items:center;
     transform:translate(-50%,-100%); pointer-events:none;
   }
+  .tr-race-signboard{
+    display:flex; align-items:center; gap:7px;
+    background:rgba(18,18,20,0.92); border:2px solid #fff; border-radius:10px;
+    padding:5px 12px 5px 5px; box-shadow:0 8px 16px -4px rgba(0,0,0,0.6); margin-bottom:3px;
+  }
   .tr-race-flag{
-    display:inline-block; padding:5px 14px; border-radius:5px 5px 0 0;
-    clip-path:polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
-    color:#fff; font-weight:900; font-size:13.5px; white-space:nowrap; box-shadow:0 3px 8px rgba(0,0,0,0.5);
+    display:inline-block; padding:5px 12px; border-radius:7px;
+    color:#fff; font-weight:900; font-size:13px; white-space:nowrap; box-shadow:0 3px 8px rgba(0,0,0,0.4);
   }
   .tr-race-flagpole{ width:2px; height:16px; background:linear-gradient(180deg,#ddd,#888); }
   .tr-race-leader-photo{
     width:34px; height:34px; border-radius:50%; background:#333 center/cover no-repeat;
-    border:2px solid #fff; box-shadow:0 4px 10px rgba(0,0,0,0.55); margin-bottom:3px; flex:none;
+    border:2px solid #fff; box-shadow:0 4px 10px rgba(0,0,0,0.55); flex:none;
   }
   .tr-race-car-img{
     width:148px; height:107px; background-size:contain; background-repeat:no-repeat; background-position:center;
@@ -5746,27 +5793,37 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   .tr-final-results{
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     z-index:60; background:rgba(8,8,10,0.96); border:4px solid var(--gold); border-radius:22px;
-    padding:34px 50px 38px; min-width:420px;
+    padding:30px 46px 32px; min-width:440px; max-width:600px; max-height:80%; overflow-y:auto;
     box-shadow:0 0 90px rgba(212,175,55,0.65), 0 30px 80px rgba(0,0,0,0.75);
     animation: rouletteWin .55s cubic-bezier(.2,.8,.3,1.3);
     text-align:center;
   }
   .tr-final-results h4{
     font-family:'Racing Sans One',sans-serif; font-size:30px; color:var(--gold);
-    margin-bottom:20px; letter-spacing:1px;
+    margin-bottom:6px; letter-spacing:1px;
   }
+  .tr-final-sub{ color:var(--gray); font-size:13.5px; margin-bottom:18px; line-height:1.5; }
   .tr-final-row{
-    display:flex; align-items:center; gap:16px; padding:12px 6px;
-    border-top:1px solid rgba(255,255,255,0.12);
+    display:flex; align-items:center; gap:14px; padding:11px 8px;
+    border-top:1px solid rgba(255,255,255,0.12); border-radius:12px;
   }
   .tr-final-row:first-child{ border-top:none; }
-  .tr-final-num{ font-size:32px; width:46px; text-align:center; flex:none; }
+  .tr-final-row-top{
+    background:linear-gradient(90deg, rgba(212,175,55,0.22), rgba(212,175,55,0.04));
+    box-shadow:0 0 0 1.5px rgba(212,175,55,0.5) inset;
+  }
+  .tr-final-num{ font-size:28px; width:46px; text-align:center; flex:none; }
+  .tr-final-row-top .tr-final-num{ font-size:34px; }
+  .tr-final-face{
+    width:46px; height:46px; border-radius:50%; background-size:cover; background-position:center;
+    background-color:#222; border:2px solid var(--gold); flex:none;
+  }
   .tr-final-car{
     width:64px; height:46px; background-size:contain; background-repeat:no-repeat; background-position:center;
     filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 6px #fff); flex:none;
   }
-  .tr-final-name{ font-size:19px; font-weight:800; color:#fff; flex:1; text-align:left; }
-  .tr-final-time{ font-family:'Racing Sans One',sans-serif; font-size:19px; color:var(--gold); flex:none; }
+  .tr-final-name{ font-size:18px; font-weight:800; color:#fff; flex:1; text-align:left; }
+  .tr-final-time{ font-family:'Racing Sans One',sans-serif; font-size:18px; color:var(--gold); flex:none; }
   .tr-rank-board{
     position:absolute; bottom:24px; right:24px; z-index:55;
     background:rgba(10,10,11,0.94); border:2px solid var(--gold); border-radius:14px;
@@ -6463,8 +6520,6 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
       </div>
     </div>
     <div class="tc-stage">
-      <video class="tc-team-video mv-hidden" id="raceTeamVideo" muted playsinline preload="auto" tabindex="-1" src="지구방위대 챌린지(2).mp4"></video>
-      <div class="tc-video-dim" id="tcVideoDim"></div>
       <div class="tc-columns" id="tcColumnsPrep1">
       <div class="tc-col">
         <div class="tc-col-header">레이스 팀 명</div>
@@ -7133,6 +7188,10 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
           <div class="bm-dice-stack">
             <button class="bm-dice-btn" id="bmDiceBtn" onclick="rollDice()">🎲 주사위 굴리기</button>
             <button class="bm-dice-btn bm-undo-btn" id="bmUndoBtn" onclick="undoLastRoll()">↩️ 다시 던지기</button>
+            <div class="bm-dice-stack-row">
+              <button class="bm-count-btn" onclick="resetBrumableGame()">↺ 새 게임</button>
+              <button class="bm-qr-btn" onclick="toggleQrPanel()">📱 휴대폰으로 참여 (QR)</button>
+            </div>
           </div>
           <div class="bm-manual-move">
             <span class="bm-manual-move-label">진행자 직접 이동</span>
@@ -7140,14 +7199,11 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             <button class="bm-count-btn" onclick="manualMoveTeam(-1)">◀ 뒤로</button>
             <button class="bm-count-btn" onclick="manualMoveTeam(1)">앞으로 ▶</button>
           </div>
-          <div class="bm-game-top-right">
-            <button class="bm-count-btn" onclick="resetBrumableGame()">↺ 새 게임</button>
-            <button class="bm-qr-btn" onclick="toggleQrPanel()">📱 휴대폰으로 참여 (QR)</button>
-          </div>
         </div>
         <div class="bm-qr-panel" id="bmQrPanel">
           <img id="bmQrImg" src="" alt="QR code">
         </div>
+        <div class="bm-board-viewport" id="bmBoardViewport">
         <div class="bm-board-frame" id="bmBoardFrame">
           <div class="bm-board-stage" id="bmBoardStage">
             <svg viewBox="0 0 1500 950" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -7161,7 +7217,11 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             <div class="page-fireworks-layer" id="fwBmBoard"></div>
           </div>
         </div>
-        <div class="bm-scoreboard" id="bmScoreboard"></div>
+        </div>
+        <div class="bm-win-overlay" id="bmWinOverlay">
+          <div class="page-fireworks-layer" id="fwBmWin"></div>
+          <div class="bm-win-board" id="bmWinBoard"></div>
+        </div>
         <div class="bm-log" id="bmLog"></div>
       </div>
     </div>
@@ -7343,6 +7403,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
       <div class="tr-race-timer" id="trRaceTimer" style="display:none;">00.0s</div>
       <div class="stage-frame" id="stageFrame2b">
         <div class="stage" id="stage2b">
+          <div class="page-fireworks-layer" id="fwTrFinal"></div>
           <svg viewBox="0 0 1500 870" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs>
               <pattern id="checkerPat2b" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
@@ -7744,37 +7805,37 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     </div>
     <div class="rap-carousel-stage reveal-on-next">
       <div class="rap-carousel-ring" id="rapCarouselRing">
-        <div class="rap-carousel-card active" style="--i:0; background-image:linear-gradient(180deg, rgba(6,6,7,0.15) 0%, rgba(6,6,7,0.85) 100%), var(--img-hero);"
+        <div class="rap-carousel-card active" style="--i:0; background-image:linear-gradient(180deg, rgba(6,6,7,0.12) 0%, rgba(6,6,7,0.55) 55%, rgba(6,6,7,0.95) 100%), var(--img-hero);"
              data-title="LIGHTS OUT : 출근 전, 리더십 Engine On" data-desc="반장으로서 수행해야 할 핵심 역할을 이해하고 현재의 리더십 현황을 점검" data-goal="워크숍 목적 및 리더십 레이스를 안내하고, 반장 Role에 대한 자가진단을 실시한다." data-ppt="#" onclick="selectRapCarousel(0, event)">
           <span class="rcc-badge">출전 전</span>
           <div class="rcc-title">리더십 Engine On</div>
           <p class="rcc-list">반장으로서 수행해야 할<br>핵심 역할을 이해하고<br>현재의 리더십 현황을 점검</p>
         </div>
-        <div class="rap-carousel-card" style="--i:1; background-image:linear-gradient(180deg, rgba(6,6,7,0.15) 0%, rgba(6,6,7,0.85) 100%), var(--img-rehearsal1);"
+        <div class="rap-carousel-card" style="--i:1; background-image:linear-gradient(180deg, rgba(6,6,7,0.12) 0%, rgba(6,6,7,0.55) 55%, rgba(6,6,7,0.95) 100%), var(--img-rehearsal1);"
              data-title="1st LAP : 출근 시간·아침 조회, 인사로 여는 우리 반" data-desc="아침 시간 구성원의 상태를 파악하고 긍정 문화의 기반을 형성, 오늘의 방향을 명확하게 전달" data-goal="우리 반의 아침 시간을 돌아보고, 10분 미팅과 지시 전달 방식을 설계한다." data-ppt="#" onclick="selectRapCarousel(1, event)">
           <span class="rcc-badge">출근 시간</span>
           <div class="rcc-title">인사로 여는 우리 반</div>
           <p class="rcc-list">아침 시간 구성원의 상태를<br>파악하고 긍정 문화의 기반을 형성,<br>오늘의 방향을 명확하게 전달</p>
         </div>
-        <div class="rap-carousel-card" style="--i:2; background-image:linear-gradient(180deg, rgba(6,6,7,0.15) 0%, rgba(6,6,7,0.85) 100%), var(--img-ccs-highfive);"
+        <div class="rap-carousel-card" style="--i:2; background-image:linear-gradient(180deg, rgba(6,6,7,0.12) 0%, rgba(6,6,7,0.55) 55%, rgba(6,6,7,0.95) 100%), var(--img-ccs-highfive);"
              data-title="2nd LAP : 일과 시간 1, 현장 이슈에 대응하기" data-desc="유형별 구성원의 특징을 이해하고 각 유형에 맞는 소통 및 피드백 스킬 습득" data-goal="역량×동기별 구성원 유형을 이해하고, 우리 반 SM 매핑과 원인 분석을 실습한다." data-ppt="#" onclick="selectRapCarousel(2, event)">
           <span class="rcc-badge">아침 조회</span>
           <div class="rcc-title">오늘의 방향 맞추기</div>
           <p class="rcc-list">유형별 구성원의 특징을<br>이해하고 각 유형에 맞는<br>소통 및 피드백 스킬 습득</p>
         </div>
-        <div class="rap-carousel-card" style="--i:3; background-image:linear-gradient(180deg, rgba(6,6,7,0.15) 0%, rgba(6,6,7,0.85) 100%), var(--img-dinner-party);"
+        <div class="rap-carousel-card" style="--i:3; background-image:linear-gradient(180deg, rgba(6,6,7,0.12) 0%, rgba(6,6,7,0.55) 55%, rgba(6,6,7,0.95) 100%), var(--img-dinner-party);"
              data-title="저녁만찬 : 반장들의 만찬" data-desc="우리 반장 리더들의 못다한 이야기를 나누며 힐링하는 즐건 시간 ^^" data-goal="우리 반장 리더들의 못다한 이야기를 나누며 힐링하는 즐건 시간 ^^" data-ppt="#" onclick="selectRapCarousel(3, event)">
           <span class="rcc-badge" style="background:#2ea043;">저녁만찬</span>
           <div class="rcc-title">반장들의 만찬</div>
           <p class="rcc-list">우리 반장 리더들의 못다한 이야기를<br>나누며 힐링하는 즐건 시간 ^^</p>
         </div>
-        <div class="rap-carousel-card" style="--i:4; background-image:linear-gradient(180deg, rgba(6,6,7,0.15) 0%, rgba(6,6,7,0.85) 100%), var(--img-pitzone);"
+        <div class="rap-carousel-card" style="--i:4; background-image:linear-gradient(180deg, rgba(6,6,7,0.12) 0%, rgba(6,6,7,0.55) 55%, rgba(6,6,7,0.95) 100%), var(--img-pitzone);"
              data-title="3rd LAP : 일과 시간 2, SM의 성장 지원하기" data-desc="구성원 육성의 중요성을 이해하고 이기는 실행을 위한 실질적인 육성 방법 체득" data-goal="유형별 육성법을 매칭하고, 기술 전수와 업무 동행 시나리오를 실습한다." data-ppt="#" onclick="selectRapCarousel(4, event)">
           <span class="rcc-badge">일과시간</span>
           <div class="rcc-title">구성원 소통과 성과 관리</div>
           <p class="rcc-list">구성원 육성의 중요성을<br>이해하고 이기는 실행을 위한<br>실질적인 육성 방법 체득</p>
         </div>
-        <div class="rap-carousel-card" style="--i:5; background-image:linear-gradient(180deg, rgba(6,6,7,0.15) 0%, rgba(6,6,7,0.85) 100%), var(--img-vd-pledge);"
+        <div class="rap-carousel-card" style="--i:5; background-image:linear-gradient(180deg, rgba(6,6,7,0.12) 0%, rgba(6,6,7,0.55) 55%, rgba(6,6,7,0.95) 100%), var(--img-vd-pledge);"
              data-title="CHECKERED FLAG : 퇴근 전, 리더십 Next Lap" data-desc="학습 내용을 현업의 행동으로 전환하고, 상호 간 격려와 응원을 나눔" data-goal="우선 실행 행동 2가지를 수립하고, 반장 리더십 실천 선언문을 작성한다." data-ppt="#" onclick="selectRapCarousel(5, event)">
           <span class="rcc-badge">퇴근 전</span>
           <div class="rcc-title">리더십 Next Lap</div>
@@ -9711,7 +9772,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     const setupEl = document.getElementById('bmSetup');
     const gameEl = document.getElementById('bmGame');
     if(setupEl) setupEl.style.display = 'none';
-    if(gameEl) gameEl.style.display = 'block';
+    if(gameEl) gameEl.style.display = 'flex';
     if(typeof bmTeams !== 'undefined' && bmTeams.length){
       bmTeams.forEach(t => {
         if(t.pos === undefined){
@@ -9720,6 +9781,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
           t.name = (nameEl && nameEl.value.trim()) || t.name || '팀';
           t.num = (numEl && numEl.value.trim()) || t.num || '1';
           t.pos = 0; t.score = 0; t.laps = 0; t.tickets = 0; t.skipNext = false;
+          resetBmWinState();
         }
       });
       if(bmCurrentTurn === undefined) bmCurrentTurn = 0;
@@ -10671,10 +10733,13 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     const board = document.createElement('div');
     board.className = 'tr-final-results';
     board.id = 'trRankBoard';
-    board.innerHTML = '<h4>🏆 ' + list[0].name + ' 우승! (' + trTargetLaps + '랩 완주)</h4>' + list.map(function(c, i){
+    board.innerHTML = '<h4>🏆 ' + list[0].name + ' 우승! (' + trTargetLaps + '랩 완주)</h4>' +
+      '<div class="tr-final-sub">전 팀이 결승선을 통과했습니다. 완주 기록 순으로 최종 순위를 발표합니다.</div>' +
+      list.map(function(c, i){
       const t = (typeof c.finishTime === 'number') ? c.finishTime.toFixed(1) + 's' : '-';
-      return '<div class="tr-final-row">' +
+      return '<div class="tr-final-row' + (i === 0 ? ' tr-final-row-top' : '') + '">' +
         '<span class="tr-final-num">' + (medals[i] || (i + 1) + '위') + '</span>' +
+        (c.leaderPhoto ? '<div class="tr-final-face" style="background-image:url(\'' + c.leaderPhoto + '\');"></div>' : '<div class="tr-final-face"></div>') +
         '<div class="tr-final-car" style="background-image:' + carCss(c.car) + ';"></div>' +
         '<span class="tr-final-name">' + c.name + '</span>' +
         '<span class="tr-final-time">' + t + '</span>' +
@@ -10729,8 +10794,10 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       const el = document.createElement('div');
       el.className = 'tr-race-car waiting';
       el.innerHTML =
-        (leaderPhoto ? '<div class="tr-race-leader-photo" style="background-image:url(\'' + leaderPhoto + '\');"></div>' : '') +
-        '<span class="tr-race-flag" style="background:' + t.color + ';">' + name + '</span>' +
+        '<div class="tr-race-signboard">' +
+          '<div class="tr-race-leader-photo" style="background-image:url(\'' + leaderPhoto + '\');"></div>' +
+          '<span class="tr-race-flag" style="background:' + t.color + ';">' + name + '</span>' +
+        '</div>' +
         '<div class="tr-race-flagpole"></div>' +
         '<div class="tr-race-car-img" style="background-image:' + carCss(t.car) + ';"></div>';
       stage.appendChild(el);
@@ -10739,7 +10806,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       const pt = pathEl.getPointAtLength(gridDist);
       el.style.left = pt.x + 'px';
       el.style.top = pt.y + 'px';
-      return { el: el, img: el.querySelector('.tr-race-car-img'), speed: 46 + Math.random() * 26, dist: gridDist, laps: 0, progress: 0, boostMeter: 0, name: name, car: t.car, finished: false };
+      return { el: el, img: el.querySelector('.tr-race-car-img'), speed: 46 + Math.random() * 26, dist: gridDist, laps: 0, progress: 0, boostMeter: 0, name: name, car: t.car, finished: false, leaderPhoto: leaderPhoto };
     });
     renderBoostPanel();
     document.getElementById('trPrepBtn').style.display = 'none';
@@ -10789,7 +10856,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       lastNow = now;
       const elapsed = (now - startTime) / 1000;
       trRaceCars.forEach(function(c){
-        if(trFinished || c.finished) return;
+        if(c.finished) return;
         // boost meter decays over time; each boost-button click tops it up
         c.boostMeter = Math.max(0, (c.boostMeter || 0) - dt * 0.35);
         const effSpeed = c.speed * (1 + c.boostMeter * 1.1);
@@ -10822,20 +10889,19 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
           sfxFireworkBurst(0);
         }
       });
-      const neededToStop = Math.min(3, trRaceCars.length);
+      const neededToStop = trRaceCars.length;
       if(trFinishOrder.length >= neededToStop && !trFinished){
         trFinished = true;
         trRaceRunning = false;
         stopTrEngineSound();
         stopTrRaceTimer();
         sfxWinner();
-        const stage = document.getElementById('stage2b');
-        if(stage) burstFireworkAt(stage, 690, 300, ['#ff5050','#ffd23f','#4da3ff','#43d17a','#ff6fc4','#ffffff']);
         bmEnsureAudio();
-        sfxFireworkBurst(0.15);
-        sfxFireworkBurst(0.55);
-        sfxCheer(0.1);
-        renderTrFinalResults(trFinishOrder.slice(0, 3));
+        sfxFanfare();
+        spawnPageFireworks('fwTrFinal');
+        setTimeout(function(){ spawnPageFireworks('fwTrFinal'); }, 550);
+        setTimeout(function(){ spawnPageFireworks('fwTrFinal'); }, 1100);
+        renderTrFinalResults(trFinishOrder);
         document.getElementById('trPrepBtn').style.display = 'inline-flex';
         document.getElementById('trGoBtn').style.display = 'none';
         document.getElementById('trGoBtn').disabled = false;
@@ -10905,6 +10971,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
   let bmTeams = [];
   let bmCurrentTurn = 0;
   let bmRolling = false;
+  let bmRaceFinished = false;
 
   function miniCarDataUri(color){
     const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20">' +
@@ -11129,8 +11196,9 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       t.pos = 0; t.score = 0; t.laps = 0; t.tickets = 0; t.skipNext = false;
     });
     bmCurrentTurn = 0;
+    resetBmWinState();
     document.getElementById('bmSetup').style.display = 'none';
-    document.getElementById('bmGame').style.display = 'block';
+    document.getElementById('bmGame').style.display = 'flex';
     document.getElementById('bmLog').innerHTML = '';
     renderBoardCells();
     renderTokens();
@@ -11148,6 +11216,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     document.getElementById('bmGame').style.display = 'none';
     document.getElementById('bmSetup').style.display = 'block';
     stopBgm();
+    resetBmWinState();
   }
 
   function renderBoardCells(){
@@ -11177,9 +11246,12 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       div.className = 'bm-token';
       div.id = 'bmToken' + i;
       div.innerHTML =
-        '<div class="bm-team-face" style="background-image:url(\'' + resolveTeamLeaderPhoto(team, i) + '\');"></div>' +
-        '<div class="bm-car-photo" style="background-image:' + carCss(team.car) + ';"></div>' +
-        '<span class="bm-flag" style="background:' + team.color + ';">' + team.name + '</span>';
+        '<div class="bm-token-signboard">' +
+          '<div class="bm-team-face" style="background-image:url(\'' + resolveTeamLeaderPhoto(team, i) + '\');"></div>' +
+          '<span class="bm-token-name" style="background:' + team.color + ';">' + team.name + '</span>' +
+        '</div>' +
+        '<div class="bm-flagpole"></div>' +
+        '<div class="bm-car-photo" style="background-image:' + carCss(team.car) + ';"></div>';
       wrap.appendChild(div);
     });
     positionTokens();
@@ -11206,6 +11278,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
 
   function updateScoreboard(){
     const wrap = document.getElementById('bmScoreboard');
+    if(!wrap) return;
     wrap.innerHTML = '';
     bmTeams.forEach(t => {
       const chip = document.createElement('div');
@@ -11474,7 +11547,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
   function applyCellEffect(teamIdx){
     const team = bmTeams[teamIdx];
     const cell = BOARD_CELLS[team.pos];
-    showCellPopup(cell);
+    if(cell.type !== 'start') showCellPopup(cell);
     if(cell.type === 'coin'){
       team.score += 100;
       logMsg('🪙 ' + team.name + ' 팀이 코인 칸에 도착해 +100P를 획득했습니다.');
@@ -11510,6 +11583,62 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     bmRolling = false;
     document.getElementById('bmDiceBtn').disabled = false;
     nextTurn();
+    checkBmRaceFinish();
+  }
+
+  /* ---- 결승선 최초 통과 팀 = 우승팀. 전체 팀을 이동 거리(랩*보드길이+칸) 순으로 등수를 매겨 화면 중앙에 발표 ---- */
+  function checkBmRaceFinish(){
+    if(bmRaceFinished) return;
+    const winner = bmTeams.find(function(t){ return t.laps >= 1; });
+    if(!winner) return;
+    bmRaceFinished = true;
+    const diceBtn = document.getElementById('bmDiceBtn');
+    if(diceBtn) diceBtn.disabled = true;
+    const undoBtn = document.getElementById('bmUndoBtn');
+    if(undoBtn) undoBtn.disabled = true;
+    renderBmWinBoard();
+    const overlay = document.getElementById('bmWinOverlay');
+    if(overlay) overlay.classList.add('show');
+    bmEnsureAudio();
+    spawnPageFireworks('fwBmWin');
+    setTimeout(function(){ spawnPageFireworks('fwBmWin'); }, 550);
+    setTimeout(function(){ spawnPageFireworks('fwBmWin'); }, 1100);
+    sfxFanfare();
+    logMsg('🏆🏁 ' + winner.name + ' 팀이 결승선을 가장 먼저 통과하여 최종 우승팀이 되었습니다!');
+  }
+  function renderBmWinBoard(){
+    const board = document.getElementById('bmWinBoard');
+    if(!board || !bmTeams.length) return;
+    const totalLen = BOARD_CELLS.length;
+    const ranked = bmTeams.map(function(t, idx){
+      return { team: t, idx: idx, progress: (t.laps || 0) * totalLen + (t.pos || 0) };
+    }).sort(function(a, b){ return b.progress - a.progress; });
+    const medals = ['🥇','🥈','🥉'];
+    board.innerHTML =
+      '<h3>🏆 ' + ranked[0].team.name + ' 우승!</h3>' +
+      '<div class="bm-win-sub">결승선을 가장 먼저 통과한 팀이 우승팀이 되고,<br>나머지 팀은 결승선까지 이동한 거리 순으로 등수가 정해집니다.</div>' +
+      ranked.map(function(r, i){
+        return '<div class="bm-win-row">' +
+          '<span class="bm-win-rank">' + (medals[i] || (i + 1) + '위') + '</span>' +
+          '<div class="bm-win-face" style="background-image:url(\'' + resolveTeamLeaderPhoto(r.team, r.idx) + '\');"></div>' +
+          '<div class="bm-win-car" style="background-image:' + carCss(r.team.car) + ';"></div>' +
+          '<span class="bm-win-name">' + r.team.name + '</span>' +
+          '</div>';
+      }).join('') +
+      '<button class="bm-win-close" onclick="closeBmWinBoard()">닫기</button>';
+  }
+  function closeBmWinBoard(){
+    const overlay = document.getElementById('bmWinOverlay');
+    if(overlay) overlay.classList.remove('show');
+  }
+  function resetBmWinState(){
+    bmRaceFinished = false;
+    const overlay = document.getElementById('bmWinOverlay');
+    if(overlay) overlay.classList.remove('show');
+    const diceBtn = document.getElementById('bmDiceBtn');
+    if(diceBtn) diceBtn.disabled = false;
+    const undoBtn = document.getElementById('bmUndoBtn');
+    if(undoBtn) undoBtn.disabled = false;
   }
 
   function nextTurn(){
@@ -11521,6 +11650,12 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     const frame = document.getElementById('bmBoardFrame');
     const stage = document.getElementById('bmBoardStage');
     if(!frame || !stage) return;
+    // 서킷판이 팝업 아래쪽 경계에 맞춰(전용 뷰포트의 바닥 기준 정렬) 위로 최대한 커지도록,
+    // 뷰포트가 자연스럽게 배분한 높이보다 일정 비율 더 키워서 위쪽 컨트롤 바로 아래까지 채운다.
+    frame.style.height = '';
+    const naturalH = frame.clientHeight;
+    const boostedH = naturalH * 1.18;
+    frame.style.height = boostedH + 'px';
     const availW = frame.clientWidth;
     const availH = frame.clientHeight;
     const scaleX = availW / 1500;
@@ -11709,20 +11844,22 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     }
     return a;
   }
+  /* ---- 풍선판에 무작위로 반영되는 경품 종류 (룰렛에서 뽑힌 당첨자가 이 중 하나를 랜덤으로 획득) ---- */
+  const PZ_PRIZE_TYPES = [
+    { label:'경품추첨권', icon:'🎫' },
+    { label:'진행자맘대로', icon:'🃏' },
+    { label:'행운권', icon:'🍀' },
+    { label:'음료권', icon:'🥤' },
+    { label:'간식권', icon:'🍪' },
+    { label:'칩', icon:'🪙' }
+  ];
   function buildPrizeItemsFromMembers(){
-    const pool = getPrizeMemberPool();
     const items = [];
-    if(!pool.length){
-      for(let i = 1; i <= 30; i++){ items.push({ member: null, icon: '🎁', label: '구성원 미등록' }); }
-      PRIZE_ITEMS = items;
-      return;
-    }
-    const shuffled = shuffleArray(pool);
-    for(let i = 0; i < 30; i++){
-      const m = shuffled[i % shuffled.length];
-      items.push({ member: m, icon: '🙂', label: m.name });
-    }
-    PRIZE_ITEMS = shuffleArray(items);
+    const perType = Math.ceil(30 / PZ_PRIZE_TYPES.length);
+    PZ_PRIZE_TYPES.forEach(function(t){
+      for(let i = 0; i < perType; i++){ items.push({ member: null, icon: t.icon, label: t.label }); }
+    });
+    PRIZE_ITEMS = shuffleArray(items).slice(0, 30);
   }
   let pzOpened = false;
   let pzPoppedSet = new Set();
@@ -12829,13 +12966,12 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     { key:'ccsVideo2Link', label:'6. 미래의 우리는?', elId:'ccsVideo2' },
     { key:'ccsVideo3Link', label:'7. 우리의 새로운 지향점', elId:'ccsVideo3' },
     { key:'bodyVideoRehearsalLink', label:'8. 리허설 Race 인트로', elId:'bodyVideoRehearsal' },
-    { key:'raceTeamVideoLink', label:'9. Race 우승 원팀 챌린지', elId:'raceTeamVideo' },
-    { key:'tcHighlightVideoLink', label:'10. 최고 에너지 레벨의 고객행복 수호대', elId:'tcHighlightVideo' },
-    { key:'bodyVideoMainLink', label:'11. 본격 Race 인트로', elId:'bodyVideoMain' },
-    { key:'bodyVideoRapCarouselLink', label:'12. 본격 Race 여정 뱃지', elId:'bodyVideoRapCarousel' },
-    { key:'bodyVideoFinalLink', label:'13. Final Race 인트로', elId:'bodyVideoFinal' },
-    { key:'bodyVideoClosing1Link', label:'14. 챔피언은 누구?', elId:'bodyVideoClosing1' },
-    { key:'heroThanksVideoLink', label:'15. 반장에게 드리는 메시지', elId:'heroThanksVideoEl' }
+    { key:'tcHighlightVideoLink', label:'9. Race 우승 원팀 챌린지', elId:'tcHighlightVideo' },
+    { key:'bodyVideoMainLink', label:'10. 본격 Race 인트로', elId:'bodyVideoMain' },
+    { key:'bodyVideoRapCarouselLink', label:'11. 본격 Race 여정 뱃지', elId:'bodyVideoRapCarousel' },
+    { key:'bodyVideoFinalLink', label:'12. Final Race 인트로', elId:'bodyVideoFinal' },
+    { key:'bodyVideoClosing1Link', label:'13. 챔피언은 누구?', elId:'bodyVideoClosing1' },
+    { key:'heroThanksVideoLink', label:'14. 반장에게 드리는 메시지', elId:'heroThanksVideoEl' }
   ];
   const FILE_LINK_REGISTRY = [
     { key:'instructorScreenLink', label:'1. 강사용 진행 화면 들어가기', elId:'instructorScreenBtn', attr:'href' },
@@ -14164,8 +14300,9 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     { time:'09:00~09:30', text:'오리엔테이션' },
     { time:'09:30~10:00', text:'HR담당 어드레스' },
     { time:'10:00~12:00', text:'리허설 RACE', sub:'2026 센터운영 Reflection / 우리의 지향점' },
-    { time:'13:00~17:00', text:'본격 RACE : 반장 리더십 스킬 Challenge', sub:'LAP 1~LAP 2 : 리더역할인식/진단, 일하는방식/문화 형성' },
-    { time:'17:00~18:00', text:'한국CC&S 담당 어드레스', sub:'지역담당과 오프컨' },
+    { time:'13:00~16:30', text:'본격 RACE : 반장 리더십 스킬 Challenge', sub:'LAP 1~LAP 2 : 리더역할인식/진단, 일하는방식/문화 형성' },
+    { time:'16:30~17:00', text:'한국CC&S 담당 어드레스', sub:'지역담당과 오프컨' },
+    { time:'17:00~18:00', text:'노경관리 리더십 특강' },
     { time:'18:00~20:00', text:'저녁만찬' }
   ];
   const SCHEDULE_DAY2 = [
@@ -14952,14 +15089,8 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     el.classList.toggle('flipped');
   }
   function showPrepTeamTableFirst(){
-    const vid = document.getElementById('raceTeamVideo');
     const cols = document.getElementById('tcColumnsPrep1');
-    const dim = document.getElementById('tcVideoDim');
-    if(!vid || !cols) return;
-    vid.pause();
-    vid.currentTime = 0;
-    vid.classList.add('mv-hidden');
-    if(dim) dim.classList.remove('show');
+    if(!cols) return;
     cols.classList.remove('tc-hidden');
     raceTeamVideoStage = 0;
   }
@@ -14975,17 +15106,9 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     return false;
   }
   function autoPlayRaceTeamVideo(){
-    const vid = document.getElementById('raceTeamVideo');
     const cols = document.getElementById('tcColumnsPrep1');
-    const dim = document.getElementById('tcVideoDim');
-    if(!vid || !cols) return;
+    if(!cols) return;
     cols.classList.add('tc-hidden');
-    if(dim) dim.classList.remove('show');
-    vid.classList.remove('mv-hidden');
-    vid.currentTime = 0;
-    vid.muted = true;
-    const p = vid.play();
-    if(p && p.catch){ p.catch(function(){}); }
     const highlight = document.getElementById('tcVideoHighlight');
     const highlightVid = document.getElementById('tcHighlightVideo');
     if(highlight) highlight.classList.add('show');
@@ -14996,25 +15119,19 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     }
   }
   function stopRaceTeamVideoReveal(){
-    const vid = document.getElementById('raceTeamVideo');
     const cols = document.getElementById('tcColumnsPrep1');
-    const dim = document.getElementById('tcVideoDim');
-    if(!vid || !cols) return false;
-    if(!vid.paused){
-      vid.pause();
-      if(dim) dim.classList.add('show');
+    const highlight = document.getElementById('tcVideoHighlight');
+    const highlightVid = document.getElementById('tcHighlightVideo');
+    if(!cols) return false;
+    if(highlightVid && !highlightVid.paused){
       cols.classList.remove('tc-hidden');
-      const highlight = document.getElementById('tcVideoHighlight');
-      const highlightVid = document.getElementById('tcHighlightVideo');
       if(highlight) highlight.classList.remove('show');
-      if(highlightVid) highlightVid.pause();
+      highlightVid.pause();
       return true;
     }
     return false;
   }
   function pauseRaceTeamVideo(){
-    const vid = document.getElementById('raceTeamVideo');
-    if(vid && !vid.paused) vid.pause();
     const highlightVid = document.getElementById('tcHighlightVideo');
     if(highlightVid && !highlightVid.paused) highlightVid.pause();
     const highlight = document.getElementById('tcVideoHighlight');
