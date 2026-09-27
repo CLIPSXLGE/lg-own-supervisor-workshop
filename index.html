@@ -2645,6 +2645,17 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     background:rgba(0,0,0,0.5); color:#fff; font-size:22px; cursor:pointer;
     display:flex; align-items:center; justify-content:center;
   }
+  .exec-video-lightbox{
+    position:fixed; inset:0; z-index:900; display:none;
+    align-items:center; justify-content:center;
+    background:rgba(4,4,5,0.92);
+  }
+  .exec-video-lightbox.show{ display:flex; }
+  .exec-video-lightbox video{
+    width:min(86vw, 1100px); max-height:86vh; border-radius:14px;
+    box-shadow:0 40px 90px rgba(0,0,0,0.7); background:#000;
+  }
+  .pill-lightred.clickable{ cursor:pointer; }
 
   /* ---- generic "reveal on smart-pointer next press" + background video ---- */
   .reveal-on-next{
@@ -6257,7 +6268,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     <div class="overview-top-section">
       <div class="overview-top-title">
         <div class="center-name-display" id="centerNameDisplay"></div>
-        <span class="pill pill-lightred"><span class="dot-blink">●</span>&nbsp; 센터 반장 리더십 Reinvent 그랑프리 Race</span>
+        <span class="pill pill-lightred clickable" onclick="openExecImpactVideo(event)"><span class="dot-blink">●</span>&nbsp; 센터 반장 리더십 Reinvent 그랑프리 Race</span>
         <h2>
           <span class="quote">"진정한 리더로 거듭나다."</span>
           <span class="ov-h2-normal">나와 센터의 더 건강하고 행복한 성장을 위한</span><br>
@@ -6344,11 +6355,15 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   <button class="ccs1-lightbox-close" onclick="closeCcs1Lightbox(event)">✕</button>
   <video id="ccs1LightboxVideo" playsinline controls onclick="event.stopPropagation();"></video>
 </div>
+<div class="exec-video-lightbox" id="execVideoLightbox" onclick="closeExecImpactVideo(event)">
+  <button class="ccs1-lightbox-close" onclick="closeExecImpactVideo(event)">✕</button>
+  <video id="execImpactLightboxVideo" src="경영진임펙트영상.mp4" playsinline controls onclick="event.stopPropagation();"></video>
+</div>
 
 <!-- ============ MISSION VIDEO PAGE ============ -->
 <section class="page" id="page-mission">
   <div class="mission-page" onclick="toggleMissionPlayback(event)">
-    <video class="mission-video-bg" id="missionVideoBg" src="" muted playsinline preload="none"></video>
+    <video class="mission-video-bg" id="missionVideoBg" src="" playsinline preload="none"></video>
     <div class="reveal-dim-overlay" id="missionDimOverlay"></div>
     <div class="mission-text">
       <span class="pill solid">교육 Mission</span>
@@ -14636,7 +14651,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
   window.addEventListener('resize', fitPrizeBoard);
 
   /* ---- mission background video (click to play / click to pause, plays once) ---- */
-  let MISSION_VIDEO_SRC = "260926_반장리더십인트로영상.mp4";
+  let MISSION_VIDEO_SRC = "260927_반장리더십인트로영상.mp4";
   let missionVideoStarted = false;
   let missionTextRevealed = false;
 
@@ -15206,6 +15221,24 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       const cardVideo = document.getElementById(ccs1LastCardVideoId);
       if(cardVideo){ cardVideo.muted = true; cardVideo.play().catch(function(){}); }
     }
+  }
+  function openExecImpactVideo(e){
+    if(e) e.stopPropagation();
+    const overlay = document.getElementById('execVideoLightbox');
+    const lbVideo = document.getElementById('execImpactLightboxVideo');
+    if(!overlay || !lbVideo) return;
+    lbVideo.currentTime = 0;
+    overlay.classList.add('show');
+    const p = lbVideo.play();
+    if(p && p.catch){ p.catch(function(){}); }
+  }
+  function closeExecImpactVideo(e){
+    if(e) e.stopPropagation();
+    const overlay = document.getElementById('execVideoLightbox');
+    const lbVideo = document.getElementById('execImpactLightboxVideo');
+    if(!overlay || !lbVideo) return;
+    lbVideo.pause();
+    overlay.classList.remove('show');
   }
   /* ---- 팀명으로 팀장 사진을 찾는 공용 헬퍼 (그랑프리 출격 준비 데이터 기반) ---- */
   function findTeamLeaderPhoto(teamName){
