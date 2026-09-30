@@ -1950,9 +1950,15 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   .bm-flagpole{ width:3px; height:20px; background:linear-gradient(180deg,#ddd,#888); margin:0 auto; }
   .bm-roulette-car{
+    position:relative;
     width:170px; height:96px; background-size:contain; background-repeat:no-repeat; background-position:center;
     background-color:#1c1c1f; border-radius:12px; border:3px solid #ffe600;
     box-shadow:0 0 24px -4px rgba(255,230,0,0.6); margin-top:8px;
+  }
+  .bm-roulette-face{
+    position:absolute; top:-16px; right:-14px; width:46px; height:46px; border-radius:50%;
+    background-size:cover; background-position:center 15%; background-color:#1a1a1c;
+    border:3px solid #ffe600; box-shadow:0 4px 10px rgba(0,0,0,0.5); z-index:2;
   }
   .bm-roulette-flag{
     display:inline-block; padding:6px 18px; border-radius:5px 5px 0 0; clip-path:polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
@@ -5228,12 +5234,13 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   #page-main .section-head a.pill{ text-decoration:none; cursor:pointer; display:inline-block; }
   .lr-header{ text-align:center; margin-bottom:22px; }
   .lr-title{ font-size:clamp(24px,3vw,38px); font-weight:900; color:#fff; margin-bottom:14px; }
-  .lr-sub{ font-size:clamp(15px,1.6vw,19px); color:#e6e6e6; font-weight:700; margin-bottom:78px; }
+  .lr-sub{ font-size:clamp(17px,1.85vw,22px); color:#e6e6e6; font-weight:700; margin-bottom:78px; }
   .lr-hl{
     display:inline-block; background:var(--red); color:#fff; font-weight:900;
     padding:2px 10px; border-radius:6px; margin:0 2px;
   }
   .lr-pillwrap{ text-align:center; margin-bottom:14px; }
+  .lr-pillwrap .pill{ font-size:17px; padding:7px 20px; }
   .lr-pillwrap .pill.solid{ animation: lrPillBlink 1.3s ease-in-out infinite; }
   @keyframes lrPillBlink{
     0%,100%{ opacity:1; box-shadow:0 6px 16px -4px rgba(227,6,19,0.6); }
@@ -5246,11 +5253,11 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   .lr-timeline{ position:relative; max-width:1160px; margin:0 auto 8px; }
   .lr-tl-row{ display:flex; }
   .lr-tl-row > div{ flex:1; text-align:center; padding:0 6px; }
-  .lr-tl-label{ font-size:clamp(11.5px,1.2vw,14px); font-weight:800; line-height:1.4; }
+  .lr-tl-label{ font-size:clamp(13px,1.35vw,16px); font-weight:800; line-height:1.4; }
   .lr-tl-label .accent{ display:block; }
   .lr-tl-label .accent.green{ color:#3ddc84; }
   .lr-tl-label .accent.orange{ color:#ff6a2b; }
-  .lr-tl-label .white{ display:block; color:#fff; font-size:clamp(12.5px,1.32vw,15.5px); }
+  .lr-tl-label .white{ display:block; color:#fff; font-size:clamp(14px,1.5vw,17.5px); }
   .lr-tl-line{
     position:relative; height:4px; margin:12px 0 14px; border-radius:2px;
     background:linear-gradient(90deg, var(--gold), var(--red) 92%);
@@ -5280,12 +5287,12 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     z-index:2;
   }
   .lr-tl-caption{
-    font-size:clamp(10.5px,1.05vw,12.5px); color:#bdbdbd; line-height:1.55;
+    font-size:clamp(12px,1.22vw,14.5px); color:#bdbdbd; line-height:1.55;
     word-break:keep-all; overflow-wrap:break-word;
   }
   .lr-cards{ display:flex; gap:14px; max-width:1200px; margin:34px auto 0; }
   .lr-card{
-    flex:1; min-height:236px; border-radius:16px; overflow:hidden; border:2px solid #000;
+    flex:1; min-height:300px; border-radius:16px; overflow:hidden; border:2px solid #000;
     box-shadow:0 16px 34px -12px rgba(0,0,0,0.6); position:relative;
     background-size:cover; background-position:center;
     display:flex; flex-direction:column; justify-content:flex-end;
@@ -5313,9 +5320,9 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     36%{ left:130%; opacity:0; }
     100%{ left:130%; opacity:0; }
   }
-  .lr-card-body{ position:relative; z-index:2; padding:14px 15px 16px; }
-  .lr-card-cat{ font-size:clamp(14px,1.35vw,17px); font-weight:900; line-height:1.3; margin-bottom:9px; text-shadow:0 2px 10px rgba(0,0,0,0.8); }
-  .lr-card-desc{ font-size:clamp(11px,1.05vw,12.5px); color:#e8e8e8; line-height:1.55; text-shadow:0 1px 6px rgba(0,0,0,0.85); }
+  .lr-card-body{ position:relative; z-index:2; padding:18px 18px 20px; }
+  .lr-card-cat{ font-size:clamp(17px,1.65vw,21px); font-weight:900; line-height:1.3; margin-bottom:11px; text-shadow:0 2px 10px rgba(0,0,0,0.8); color:#fff !important; }
+  .lr-card-desc{ font-size:clamp(14px,1.35vw,16.5px); color:#fff; line-height:1.55; text-shadow:0 1px 6px rgba(0,0,0,0.85); }
   @media (max-width:900px){
     .lr-tl-label{ font-size:10.5px; }
     .lr-cards{ flex-direction:column; }
@@ -5956,6 +5963,159 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   .tr-boost-btn:hover{ background:#ff2b1c; transform:scale(1.05); }
   .tr-boost-btn:active{ transform:scale(0.94); }
+
+  .cheer-gauge-overlay{
+    position:fixed; inset:0; z-index:960; display:none;
+    align-items:center; justify-content:center; pointer-events:none;
+    background:rgba(0,0,0,0);
+  }
+  .cheer-gauge-overlay.show{ display:flex; pointer-events:auto; background:rgba(0,0,0,0.72); }
+  .cheer-gauge-box{
+    position:relative; width:min(560px, 92vw); max-height:86vh; overflow-y:auto;
+    background:linear-gradient(160deg, #1b1b20, #101013); border:2px solid var(--line);
+    border-radius:26px; padding:34px 28px 28px; box-shadow:0 24px 60px rgba(0,0,0,0.6);
+    animation:cellPopIn .35s cubic-bezier(.2,.9,.3,1.3) forwards;
+  }
+  .cheer-gauge-close{
+    position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:50%;
+    background:rgba(255,255,255,0.08); border:1px solid var(--line); color:#fff; font-size:15px;
+    font-weight:900; cursor:pointer; z-index:2;
+  }
+  .cheer-gauge-close:hover{ background:rgba(255,255,255,0.2); }
+  .cheer-pick-title{
+    font-family:'Racing Sans One',sans-serif; font-size:26px; color:#fff; text-align:center;
+    margin:0 0 6px;
+  }
+  .cheer-pick-sub{ text-align:center; color:var(--gray); font-size:13.5px; margin:0 0 20px; }
+  .cheer-pick-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); gap:12px;
+  }
+  .cheer-pick-btn{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.06); border:1px solid var(--line); border-radius:16px;
+    padding:16px 10px; cursor:pointer; color:#fff; font-family:inherit;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .cheer-pick-btn:hover{ background:rgba(255,157,46,0.16); border-color:#ff9d2e; transform:translateY(-2px); }
+  .cheer-pick-car{ width:56px; height:56px; background-size:contain; background-repeat:no-repeat; background-position:center; }
+  .cheer-pick-name{ font-size:15px; font-weight:900; }
+  .cheer-pick-meter{
+    width:100%; height:8px; background:var(--black3); border-radius:999px; overflow:hidden; border:1px solid var(--line);
+  }
+  .cheer-pick-meter-fill{ height:100%; background:linear-gradient(90deg,#ff9d2e,#ff3b2f); }
+  .cheer-stage{ text-align:center; }
+  .cheer-stage-team{
+    font-family:'Racing Sans One',sans-serif; font-size:24px; color:#ffd23f; margin-bottom:8px;
+  }
+  .cheer-countdown-num{
+    font-family:'Racing Sans One',sans-serif; font-size:96px; color:#fff; line-height:1;
+    margin:18px 0; text-shadow:0 6px 18px rgba(0,0,0,0.6);
+  }
+  .cheer-instruction{ color:var(--gray); font-size:14.5px; margin-bottom:18px; }
+  .cheer-vu-wrap{
+    width:100%; height:26px; background:var(--black3); border-radius:999px; overflow:hidden;
+    border:1px solid var(--line); margin-bottom:6px;
+  }
+  .cheer-vu-fill{
+    height:100%; width:0%; background:linear-gradient(90deg,#2e9e4f,#ffd23f 60%,#ff3b2f);
+    transition:width .05s linear;
+  }
+  .cheer-result-emoji{ font-size:72px; margin:8px 0; }
+  .cheer-result-title{ font-family:'Racing Sans One',sans-serif; font-size:28px; color:#fff; margin:0 0 4px; }
+  .cheer-result-sub{ color:var(--gray); font-size:14px; margin-bottom:22px; }
+  .cheer-mic-error{ color:#ff9d2e; font-size:13px; margin:6px 0 14px; }
+  .cheer-manual-row{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:6px; }
+  .cheer-manual-btn{
+    background:var(--red); color:#fff; border:none; border-radius:999px; padding:10px 18px;
+    font-weight:900; font-size:13.5px; cursor:pointer; font-family:'Racing Sans One',sans-serif;
+    letter-spacing:0.5px;
+  }
+  .cheer-manual-btn:hover{ background:#ff2b1c; transform:scale(1.05); }
+  .cheer-again-row{ display:flex; gap:10px; justify-content:center; margin-top:18px; flex-wrap:wrap; }
+  .cheer-again-btn{
+    background:rgba(255,255,255,0.08); border:1px solid var(--line); color:#fff; border-radius:999px;
+    padding:10px 20px; font-weight:800; font-size:13.5px; cursor:pointer;
+  }
+  .cheer-again-btn:hover{ background:rgba(255,255,255,0.18); }
+  .cheer-again-btn.primary{ background:var(--gold); color:#111; border-color:var(--gold); }
+
+  /* ---- 함성 게이지 단계별 임팩트 효과 (약하게~최고 단계마다 강도를 크게 차이나게) ---- */
+  @keyframes cheerShakeSm{
+    0%,100%{ transform:translate(0,0); }
+    25%{ transform:translate(-3px,2px); }
+    50%{ transform:translate(3px,-2px); }
+    75%{ transform:translate(-2px,1px); }
+  }
+  @keyframes cheerShakeMd{
+    0%,100%{ transform:translate(0,0) rotate(0deg); }
+    15%{ transform:translate(-9px,6px) rotate(-1.2deg); }
+    30%{ transform:translate(9px,-6px) rotate(1.2deg); }
+    45%{ transform:translate(-7px,5px) rotate(-0.8deg); }
+    60%{ transform:translate(7px,-4px) rotate(0.8deg); }
+    75%{ transform:translate(-4px,3px); }
+    90%{ transform:translate(3px,-2px); }
+  }
+  @keyframes cheerShakeLg{
+    0%,100%{ transform:translate(0,0) scale(1) rotate(0deg); }
+    8%{ transform:translate(-18px,12px) scale(1.035) rotate(-2deg); }
+    16%{ transform:translate(18px,-13px) scale(1.045) rotate(2deg); }
+    24%{ transform:translate(-16px,11px) scale(1.03) rotate(-1.6deg); }
+    32%{ transform:translate(15px,-10px) scale(1.02) rotate(1.6deg); }
+    44%{ transform:translate(-12px,8px) rotate(-1deg); }
+    56%{ transform:translate(11px,-7px) rotate(1deg); }
+    68%{ transform:translate(-8px,5px); }
+    80%{ transform:translate(6px,-4px); }
+    92%{ transform:translate(-3px,2px); }
+  }
+  .cheer-shake-1{ animation:cheerShakeSm .3s ease; }
+  .cheer-shake-2{ animation:cheerShakeMd .45s ease; }
+  .cheer-shake-3{ animation:cheerShakeMd .55s cubic-bezier(.36,.07,.19,.97); }
+  .cheer-shake-4{ animation:cheerShakeLg .8s cubic-bezier(.36,.07,.19,.97); }
+
+  .cheer-burst-layer{ position:absolute; inset:0; z-index:970; pointer-events:none; overflow:visible; }
+  .cheer-burst-layer .fw-spark{
+    position:absolute; left:0; top:0; width:7px; height:7px; border-radius:50%;
+    opacity:0; box-shadow:0 0 6px 1px currentColor;
+    animation: fwSparkFly 900ms cubic-bezier(.15,.7,.3,1) forwards;
+  }
+  .cheer-burst-layer .fw-spark.cheer-spark-big{ width:11px; height:11px; box-shadow:0 0 12px 3px currentColor; }
+  .cheer-burst-layer .fw-flash{
+    position:absolute; left:-70px; top:-70px; width:140px; height:140px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,220,120,0.5) 40%, transparent 70%);
+    opacity:0; animation: fwFlash 500ms ease-out forwards;
+  }
+  .cheer-screen-flash{
+    position:absolute; inset:0; border-radius:26px; opacity:0; pointer-events:none;
+    animation: cheerScreenFlash .55s ease-out forwards;
+  }
+  @keyframes cheerScreenFlash{
+    0%{ opacity:0.85; }
+    100%{ opacity:0; }
+  }
+  .cheer-result-emoji.tier-1{ font-size:60px; }
+  .cheer-result-emoji.tier-2{ font-size:78px; animation:cheerEmojiPop .5s ease; }
+  .cheer-result-emoji.tier-3{ font-size:96px; filter:drop-shadow(0 0 14px rgba(255,157,46,0.7)); animation:cheerEmojiPop .55s ease; }
+  .cheer-result-emoji.tier-4{
+    font-size:120px; filter:drop-shadow(0 0 22px rgba(255,60,30,0.85));
+    animation:cheerEmojiPopBig .7s cubic-bezier(.36,.07,.19,.97);
+  }
+  @keyframes cheerEmojiPop{
+    0%{ transform:scale(0.3); opacity:0; }
+    60%{ transform:scale(1.18); opacity:1; }
+    100%{ transform:scale(1); opacity:1; }
+  }
+  @keyframes cheerEmojiPopBig{
+    0%{ transform:scale(0.2) rotate(-8deg); opacity:0; }
+    50%{ transform:scale(1.35) rotate(4deg); opacity:1; }
+    75%{ transform:scale(0.92) rotate(-2deg); }
+    100%{ transform:scale(1) rotate(0deg); opacity:1; }
+  }
+  .cheer-result-title.tier-3{ color:#ff9d2e; text-shadow:0 0 16px rgba(255,157,46,0.6); }
+  .cheer-result-title.tier-4{
+    font-size:34px; color:#ffd23f; text-shadow:0 0 22px rgba(255,210,30,0.85), 0 0 40px rgba(255,60,30,0.5);
+    letter-spacing:0.5px;
+  }
+
   .tr-countdown{
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     z-index:50; font-family:'Racing Sans One',sans-serif; font-size:210px; color:#fff;
@@ -6720,7 +6880,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     <div class="tc-video-highlight" id="tcVideoHighlight" style="padding-top:60px;">
       <div class="tc-video-highlight-label">최고 에너지 레벨의 <span style="color:#ffd400;">고객행복</span> 수호대는 우리팀</div>
       <div class="tc-video-highlight-card">
-        <video class="tc-video-highlight-video" id="tcHighlightVideo" muted loop playsinline preload="auto" src="지구방위대 챌린지(2).mp4"></video>
+        <video class="tc-video-highlight-video" id="tcHighlightVideo" playsinline preload="auto" src="지구방위대 챌린지(2).mp4"></video>
       </div>
     </div>
     <div class="tc-stage">
@@ -7735,10 +7895,13 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
       <button class="rv-side-btn rv-gold" id="trPrepBtn" onclick="prepareTeamRace(event)">🏁 출발 준비</button>
       <button class="rv-side-btn rv-gold" id="trGoBtn" onclick="fireStartSignal(event)" style="display:none;">🚦 출발 신호!</button>
       <button class="rv-side-btn rv-pink" id="trRestartBtn" onclick="prepareTeamRace(event)">🔄 다시 출발하기</button>
-      <button class="bm-qr-btn" onclick="toggleTrBoostQr(event)">📱 부스트 참여 QR</button>
+      <button class="bm-qr-btn" onclick="openCheerGaugeTeamPicker(event)">🎤 함성 게이지로 부스트!</button>
     </div>
-    <div class="bm-qr-panel tr-boost-qr-panel" id="trBoostQrPanel">
-      <img id="trBoostQrImg" src="" alt="QR code">
+    <div class="cheer-gauge-overlay" id="cheerGaugeOverlay" onclick="if(event.target===this) closeCheerGauge(event);">
+      <div class="cheer-gauge-box" id="cheerGaugeBox">
+        <button class="cheer-gauge-close" onclick="closeCheerGauge(event)" aria-label="닫기">✕</button>
+        <div id="cheerGaugeContent"></div>
+      </div>
     </div>
     <div class="tr-boost-float" id="trBoostFloat">
       <button class="tr-boost-close-btn" id="trBoostPanelCloseWrap" style="display:none;" onclick="closeBoostPanel(event)" aria-label="닫기">✕</button>
@@ -7847,10 +8010,6 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   <h2>🏁 반장 레이스 참여 허브</h2>
   <p>참여하고 싶은 활동을 선택하세요</p>
   <div class="hub-menu">
-    <button type="button" class="hub-menu-item" onclick="hubOpenBoost()">
-      <span class="hub-menu-icon">🔥</span>
-      <span class="hub-menu-text"><span class="hub-menu-title">부스트 참여</span><span class="hub-menu-sub">우리 팀 부스트 게이지 올리기</span></span>
-    </button>
     <button type="button" class="hub-menu-item" onclick="hubOpenVote()">
       <span class="hub-menu-icon">🏆</span>
       <span class="hub-menu-text"><span class="hub-menu-title">사진 콘테스트 투표</span><span class="hub-menu-sub">조별 사진에 좋아요</span></span>
@@ -8216,7 +8375,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         <div class="flag-sq" style="background:var(--red)"></div><div class="flag-sq" style="background:#fff"></div>
         <div class="flag-sq" style="background:#fff"></div><div class="flag-sq" style="background:var(--red)"></div>
       </div>
-      <span class="pill solid gold">Final Race</span>
+      <a class="pill solid gold" id="finalPromiseBadgeLink" href="26년_반장부트캠프_인사노경특강_최종.pptx" target="_blank" rel="noopener" onclick="event.stopPropagation();">Final Race</a>
       <h1 style="margin-top:18px;"><span class="act-highlight">진정한 리더로</span> · 거듭나기 약속</h1>
       <p>개선이 필요한 영역에 대한 변화과제를 작성하고 컨센서스를 이루며,<br>건강하고 행복한 센터를 이끌어가는 반장으로서 실천계획서를 다짐하는 시간입니다.</p>
     </div>
@@ -10063,6 +10222,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       const gameEl = document.getElementById('bmGame');
       if(setupEl) setupEl.style.display = '';
       if(gameEl) gameEl.style.display = 'none';
+      if(typeof syncBmTeamsFromPrepTeams === 'function') syncBmTeamsFromPrepTeams();
       requestAnimationFrame(fitBoard);
     } else {
       popup.classList.add('green-theme');
@@ -11098,6 +11258,298 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     if(idx === -1) return;
     boostTeam(idx);
   }
+
+  // ==== 함성 게이지 (Cheer-o-meter) : 휴대폰 QR 없이 진행자 기기 마이크로 팀별 함성 크기를
+  //      측정해서 부스트를 주는 방식. 마이크를 쓸 수 없는 환경(권한 거부/미지원)에서는
+  //      진행자가 함성 크기를 직접 선택하는 수동 모드로 자동 전환됩니다.
+  let cheerAudioCtx = null;
+  let cheerAnalyser = null;
+  let cheerMicStream = null;
+  let cheerMeasuring = false;
+  let cheerRafId = null;
+  let cheerCurrentIdx = -1;
+  const CHEER_DURATION_SEC = 3;
+
+  function renderCheerGaugeTeamPicker(){
+    const content = document.getElementById('cheerGaugeContent');
+    if(!content || !trRaceCars) return;
+    content.innerHTML =
+      '<h3 class="cheer-pick-title">🎤 함성 게이지</h3>' +
+      '<p class="cheer-pick-sub">부스트할 팀을 선택한 뒤, 다 함께 크게 함성을 질러주세요!</p>' +
+      '<div class="cheer-pick-grid">' +
+      trRaceCars.map(function(c, i){
+        const pct = Math.round((c.boostMeter || 0) * 100);
+        return '<button type="button" class="cheer-pick-btn" onclick="startCheerMeasurement(' + i + ')">' +
+          '<div class="cheer-pick-car" style="background-image:' + carCss(c.car) + ';"></div>' +
+          '<span class="cheer-pick-name">' + c.name + '</span>' +
+          '<div class="cheer-pick-meter"><div class="cheer-pick-meter-fill" style="width:' + pct + '%;"></div></div>' +
+          '</button>';
+      }).join('') +
+      '</div>';
+  }
+  function openCheerGaugeTeamPicker(e){
+    if(e){ e.stopPropagation(); }
+    if(!trRaceCars || !trRaceCars.length){
+      alert('먼저 "출발 준비" 버튼을 눌러 레이스를 준비해주세요!');
+      return;
+    }
+    if(!trRaceRunning){
+      alert('레이스가 진행 중일 때만 함성 게이지로 부스트할 수 있습니다. "출발 신호!"를 눌러 레이스를 시작하세요.');
+      return;
+    }
+    renderCheerGaugeTeamPicker();
+    const overlay = document.getElementById('cheerGaugeOverlay');
+    if(overlay) overlay.classList.add('show');
+  }
+  function closeCheerGauge(e){
+    if(e){ e.stopPropagation(); }
+    stopCheerMic();
+    const overlay = document.getElementById('cheerGaugeOverlay');
+    if(overlay) overlay.classList.remove('show');
+    const burstLayer = document.getElementById('cheerBurstLayer');
+    if(burstLayer) burstLayer.innerHTML = '';
+    const box = document.getElementById('cheerGaugeBox');
+    if(box) box.classList.remove('cheer-shake-1','cheer-shake-2','cheer-shake-3','cheer-shake-4');
+  }
+  function stopCheerMic(){
+    cheerMeasuring = false;
+    if(cheerRafId){ cancelAnimationFrame(cheerRafId); cheerRafId = null; }
+    if(cheerMicStream){
+      try{ cheerMicStream.getTracks().forEach(function(t){ t.stop(); }); }catch(err){}
+      cheerMicStream = null;
+    }
+    if(cheerAudioCtx){
+      try{ cheerAudioCtx.close(); }catch(err){}
+      cheerAudioCtx = null;
+    }
+    cheerAnalyser = null;
+  }
+  function cheerTierFor(level){
+    // 단계(약하게~최고)별로 부스트 양과 효과 강도(power)를 크게 벌려서,
+    // 자동차가 빨라지는 정도와 화면 효과가 확실하게 차이나도록 합니다.
+    if(level >= 0.8) return { power:4, amount:1.0, emoji:'🔥🔥🔥', title:'대박 함성!!', sub:'엄청난 함성으로 초강력 부스트를 획득했습니다!' };
+    if(level >= 0.55) return { power:3, amount:0.65, emoji:'🔥🔥', title:'뜨거운 함성!', sub:'힘찬 함성으로 강력한 부스트를 획득했습니다!' };
+    if(level >= 0.3) return { power:2, amount:0.35, emoji:'🔥', title:'좋은 함성!', sub:'괜찮은 함성으로 부스트를 획득했습니다.' };
+    return { power:1, amount:0.12, emoji:'💨', title:'조금 아쉬워요', sub:'다음엔 더 크게 함성을 질러보세요!' };
+  }
+  // 함성 크기(등급)에 따라 화면 흔들림/불꽃 파티클/스크린 플래시/사운드를 단계별로
+  // 확연하게 다르게 재생하는 임팩트 효과. power 1(약하게)~4(최고)로 강도가 커집니다.
+  function playCheerImpactEffect(power){
+    const box = document.getElementById('cheerGaugeBox');
+    const overlay = document.getElementById('cheerGaugeOverlay');
+    if(box){
+      box.classList.remove('cheer-shake-1','cheer-shake-2','cheer-shake-3','cheer-shake-4');
+      void box.offsetWidth;
+      box.classList.add('cheer-shake-' + power);
+    }
+    if(overlay){
+      let layer = document.getElementById('cheerBurstLayer');
+      if(!layer){
+        layer = document.createElement('div');
+        layer.className = 'cheer-burst-layer';
+        layer.id = 'cheerBurstLayer';
+        overlay.appendChild(layer);
+      }
+      if(power >= 2){
+        const screenFlash = document.createElement('div');
+        screenFlash.className = 'cheer-screen-flash';
+        const flashColors = { 2:'rgba(255,255,255,0.35)', 3:'rgba(255,180,60,0.55)', 4:'rgba(255,90,40,0.7)' };
+        screenFlash.style.background = 'radial-gradient(circle, ' + (flashColors[power] || flashColors[2]) + ' 0%, transparent 72%)';
+        layer.appendChild(screenFlash);
+        setTimeout(function(){ screenFlash.remove(); }, 620);
+      }
+      const cx = box ? box.offsetLeft + box.offsetWidth / 2 : (layer.clientWidth || window.innerWidth) / 2;
+      const cy = box ? box.offsetTop + box.offsetHeight / 2 : (layer.clientHeight || window.innerHeight) / 2;
+      const sparkCounts = { 1:0, 2:10, 3:20, 4:36 };
+      const sparkCount = sparkCounts[power] || 0;
+      const colors = ['#ff5050','#ffd23f','#4da3ff','#43d17a','#ff6fc4','#ffffff','#ff9d2e'];
+      for(let i = 0; i < sparkCount; i++){
+        const ang = (Math.PI * 2 * i / sparkCount) + Math.random() * 0.3;
+        const dist = (power >= 4 ? 140 : power >= 3 ? 100 : 70) + Math.random() * (power >= 4 ? 90 : 60);
+        const dx = Math.cos(ang) * dist;
+        const dy = Math.sin(ang) * dist;
+        const spark = document.createElement('div');
+        spark.className = 'fw-spark' + (power >= 3 ? ' cheer-spark-big' : '');
+        spark.style.left = cx + 'px';
+        spark.style.top = cy + 'px';
+        spark.style.color = colors[Math.floor(Math.random() * colors.length)];
+        spark.style.setProperty('--fw-dx', dx + 'px');
+        spark.style.setProperty('--fw-dy', dy + 'px');
+        layer.appendChild(spark);
+        setTimeout(function(){ spark.remove(); }, 950);
+      }
+      if(power >= 3){
+        const flash = document.createElement('div');
+        flash.className = 'fw-flash';
+        flash.style.left = (cx - 70) + 'px';
+        flash.style.top = (cy - 70) + 'px';
+        layer.appendChild(flash);
+        setTimeout(function(){ flash.remove(); }, 550);
+      }
+      if(power >= 4){
+        setTimeout(function(){
+          const flash2 = document.createElement('div');
+          flash2.className = 'fw-flash';
+          flash2.style.left = (cx - 70 + (Math.random()*80-40)) + 'px';
+          flash2.style.top = (cy - 70 + (Math.random()*60-30)) + 'px';
+          layer.appendChild(flash2);
+          setTimeout(function(){ flash2.remove(); }, 550);
+        }, 160);
+      }
+    }
+    bmEnsureAudio();
+    if(power === 1){
+      bmTone(420, 0.14, 'sine', 0.14, 0);
+    } else if(power === 2){
+      bmMelody([[660,0.1],[880,0.14]], 'square', 0.22);
+    } else if(power === 3){
+      bmTone(90, 0.22, 'sawtooth', 0.2, 0);
+      bmMelody([[660,0.08],[880,0.1],[1108,0.16],[1318,0.16]], 'square', 0.26);
+    } else {
+      bmTone(70, 0.32, 'sawtooth', 0.28, 0);
+      bmTone(55, 0.4, 'square', 0.22, 0.02);
+      bmMelody([[660,0.07],[880,0.08],[1108,0.1],[1318,0.12],[1568,0.22]], 'square', 0.3);
+      for(let i = 0; i < 6; i++){ bmTone(900 + Math.random()*1400, 0.05, 'square', 0.12, 0.1 + i*0.035); }
+    }
+  }
+  function startCheerMeasurement(idx){
+    if(!trRaceCars || !trRaceCars[idx]) return;
+    cheerCurrentIdx = idx;
+    const team = trRaceCars[idx];
+    const content = document.getElementById('cheerGaugeContent');
+    if(!content) return;
+    content.innerHTML =
+      '<div class="cheer-stage">' +
+        '<div class="cheer-stage-team">' + team.name + ' 부스트!</div>' +
+        '<div class="cheer-countdown-num" id="cheerCountdownNum">3</div>' +
+        '<div class="cheer-instruction">준비하세요... 신호가 뜨면 다 함께 크게 함성을 질러주세요!</div>' +
+      '</div>';
+    bmEnsureAudio();
+    let count = 3;
+    bmTone(440, 0.12, 'square', 0.22, 0);
+    const timer = setInterval(function(){
+      count--;
+      const numEl = document.getElementById('cheerCountdownNum');
+      if(count > 0){
+        if(numEl) numEl.textContent = count;
+        bmTone(440, 0.12, 'square', 0.22, 0);
+      } else {
+        clearInterval(timer);
+        if(numEl) numEl.textContent = '함성 시작!';
+        bmTone(880, 0.4, 'square', 0.3, 0);
+        beginCheerListening(idx);
+      }
+    }, 700);
+  }
+  function beginCheerListening(idx){
+    if(!trRaceCars || !trRaceCars[idx]) return;
+    const team = trRaceCars[idx];
+    const content = document.getElementById('cheerGaugeContent');
+    if(!content) return;
+    content.innerHTML =
+      '<div class="cheer-stage">' +
+        '<div class="cheer-stage-team">' + team.name + ' 부스트!</div>' +
+        '<div class="cheer-instruction">지금 크게 함성을 질러주세요! 📣</div>' +
+        '<div class="cheer-vu-wrap"><div class="cheer-vu-fill" id="cheerVuFill"></div></div>' +
+      '</div>';
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+      showCheerManualFallback(idx, '이 기기/브라우저에서는 마이크를 사용할 수 없습니다. 함성 크기를 직접 선택해주세요.');
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio:true }).then(function(stream){
+      if(cheerCurrentIdx !== idx){ stream.getTracks().forEach(function(t){ t.stop(); }); return; }
+      cheerMicStream = stream;
+      const AudioCtxCls = window.AudioContext || window.webkitAudioContext;
+      if(!AudioCtxCls){
+        stream.getTracks().forEach(function(t){ t.stop(); });
+        showCheerManualFallback(idx, '이 브라우저에서는 함성 측정을 사용할 수 없습니다. 함성 크기를 직접 선택해주세요.');
+        return;
+      }
+      cheerAudioCtx = new AudioCtxCls();
+      const source = cheerAudioCtx.createMediaStreamSource(stream);
+      cheerAnalyser = cheerAudioCtx.createAnalyser();
+      cheerAnalyser.fftSize = 1024;
+      source.connect(cheerAnalyser);
+      const data = new Uint8Array(cheerAnalyser.fftSize);
+      let peak = 0, sumSq = 0, samples = 0;
+      cheerMeasuring = true;
+      const startTs = performance.now();
+      function tick(){
+        if(!cheerMeasuring) return;
+        cheerAnalyser.getByteTimeDomainData(data);
+        let s = 0;
+        for(let i = 0; i < data.length; i++){
+          const v = (data[i] - 128) / 128;
+          s += v * v;
+        }
+        const rms = Math.sqrt(s / data.length);
+        sumSq += rms * rms;
+        samples++;
+        if(rms > peak) peak = rms;
+        const level = Math.min(1, rms * 2.2);
+        const fill = document.getElementById('cheerVuFill');
+        if(fill) fill.style.width = (level * 100) + '%';
+        const elapsed = (performance.now() - startTs) / 1000;
+        if(elapsed >= CHEER_DURATION_SEC){
+          cheerMeasuring = false;
+          const avgRms = samples ? Math.sqrt(sumSq / samples) : 0;
+          const finalLevel = Math.min(1, (avgRms * 0.6 + peak * 0.4) * 2.2);
+          stopCheerMic();
+          finishCheerMeasurement(idx, finalLevel);
+          return;
+        }
+        cheerRafId = requestAnimationFrame(tick);
+      }
+      cheerRafId = requestAnimationFrame(tick);
+    }).catch(function(err){
+      showCheerManualFallback(idx, '마이크 접근이 거부되었거나 사용할 수 없습니다. 함성 크기를 직접 선택해주세요.');
+    });
+  }
+  function showCheerManualFallback(idx, message){
+    stopCheerMic();
+    if(!trRaceCars || !trRaceCars[idx]) return;
+    const team = trRaceCars[idx];
+    const content = document.getElementById('cheerGaugeContent');
+    if(!content) return;
+    content.innerHTML =
+      '<div class="cheer-stage">' +
+        '<div class="cheer-stage-team">' + team.name + ' 부스트!</div>' +
+        (message ? '<div class="cheer-mic-error">' + message + '</div>' : '') +
+        '<div class="cheer-instruction">함성 크기를 직접 선택해주세요:</div>' +
+        '<div class="cheer-manual-row">' +
+          '<button type="button" class="cheer-manual-btn" onclick="finishCheerMeasurement(' + idx + ', 0.1)">약하게</button>' +
+          '<button type="button" class="cheer-manual-btn" onclick="finishCheerMeasurement(' + idx + ', 0.45)">보통</button>' +
+          '<button type="button" class="cheer-manual-btn" onclick="finishCheerMeasurement(' + idx + ', 0.7)">강하게</button>' +
+          '<button type="button" class="cheer-manual-btn" onclick="finishCheerMeasurement(' + idx + ', 1)">최고!</button>' +
+        '</div>' +
+      '</div>';
+  }
+  function finishCheerMeasurement(idx, level){
+    stopCheerMic();
+    if(!trRaceCars || !trRaceCars[idx]) return;
+    const team = trRaceCars[idx];
+    const tier = cheerTierFor(level);
+    if(trRaceRunning){
+      team.boostMeter = Math.min(1, (team.boostMeter || 0) + tier.amount);
+      const fill = document.getElementById('trBoostFill' + idx);
+      if(fill) fill.style.width = (team.boostMeter * 100) + '%';
+    }
+    const content = document.getElementById('cheerGaugeContent');
+    if(!content) return;
+    content.innerHTML =
+      '<div class="cheer-stage">' +
+        '<div class="cheer-stage-team">' + team.name + '</div>' +
+        '<div class="cheer-result-emoji tier-' + tier.power + '">' + tier.emoji + '</div>' +
+        '<div class="cheer-result-title tier-' + tier.power + '">' + tier.title + '</div>' +
+        '<div class="cheer-result-sub">' + tier.sub + '</div>' +
+        '<div class="cheer-again-row">' +
+          '<button type="button" class="cheer-again-btn primary" onclick="renderCheerGaugeTeamPicker()">다른 팀 부스트</button>' +
+          '<button type="button" class="cheer-again-btn" onclick="closeCheerGauge(event)">닫기</button>' +
+        '</div>' +
+      '</div>';
+    playCheerImpactEffect(tier.power);
+  }
+
   let trLastBoostSignalTs = 0;
   function applyTrBoostSignalRaw(raw){
     if(!raw) return;
@@ -11174,16 +11626,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     trRaceCars = bmTeams.map(function(t, idx){
       const nameInput = document.getElementById('bmName' + t.formId);
       const name = nameInput && nameInput.value ? nameInput.value : ('조 ' + (idx + 1));
-      let leaderPhoto = '';
-      if(typeof PREP_TEAMS !== 'undefined' && typeof PREP_MEMBERS !== 'undefined'){
-        const norm = function(s){ return (s || '').replace(/\s+/g, '').toLowerCase(); };
-        const matchIdx = PREP_TEAMS.findIndex(function(pt){ return pt.name && norm(pt.name) === norm(name); });
-        if(matchIdx !== -1){
-          const members = PREP_MEMBERS.filter(function(m){ return m.teamIdx === matchIdx; });
-          const leader = members.find(function(m){ return m.isLeader; }) || members[0];
-          if(leader && leader.photo) leaderPhoto = leader.photo;
-        }
-      }
+      const leaderPhoto = resolveTeamLeaderPhoto(Object.assign({}, t, { name: name }), idx) || '';
       const el = document.createElement('div');
       el.className = 'tr-race-car waiting';
       el.innerHTML =
@@ -11383,13 +11826,36 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
   function resolveTeamLeaderPhoto(team, teamIdx){
     // 1) '그랑프리 출격 준비' 페이지의 역할 분장(팀 디렉터/팀장 지정)에서 실제로 사진이 저장되는 곳은
     //    PREP_MEMBERS이므로, 여기서 팀장으로 지정된 인원의 사진을 최우선으로 사용합니다.
+    //    '레이스 준비'의 조 이름(예: "조 1")과 '출격 준비'의 조 라벨(예: "1조")은 표기 순서가 달라
+    //    문자열이 서로를 포함하지 않으므로, 조 번호(숫자)를 뽑아 우선 비교합니다. 팀 개수/순서가
+    //    서로 어긋나 있을 수 있는 배열 인덱스는 다른 방법으로 못 찾았을 때의 마지막 수단으로만 씁니다.
     try{
       if(typeof PREP_TEAMS !== 'undefined' && typeof PREP_MEMBERS !== 'undefined' && PREP_TEAMS.length){
+        const norm = function(s){ return (s || '').replace(/\s+/g, '').toLowerCase(); };
+        const teamNum = (team && team.name && (team.name.match(/\d+/) || [])[0]) || null;
         let idx = -1;
-        if(typeof teamIdx === 'number' && PREP_TEAMS[teamIdx]) idx = teamIdx;
-        if(idx === -1) idx = PREP_TEAMS.findIndex(function(t){ return t.name === team.name; });
-        if(idx === -1){
-          idx = PREP_TEAMS.findIndex(function(t){ return team.name && t.name && (team.name.indexOf(t.name) > -1 || t.name.indexOf(team.name) > -1); });
+        // 1-a) 조 번호가 서로 일치하는 조를 최우선으로 매칭 (예: "조 1" ↔ "1조")
+        if(teamNum){
+          idx = PREP_TEAMS.findIndex(function(t){
+            const labelNum = ((t.groupLabel && t.groupLabel.match(/\d+/)) || (t.name && t.name.match(/\d+/)) || [])[0];
+            return labelNum === teamNum;
+          });
+        }
+        // 1-b) 이름(공백 무시)이 정확히 일치하거나 서로 포함 관계인 경우
+        if(idx === -1 && team && team.name){
+          idx = PREP_TEAMS.findIndex(function(t){ return t.name && norm(t.name) === norm(team.name); });
+        }
+        if(idx === -1 && team && team.name){
+          idx = PREP_TEAMS.findIndex(function(t){
+            return (t.groupLabel && norm(t.groupLabel) === norm(team.name)) ||
+                   (t.name && (norm(team.name).indexOf(norm(t.name)) > -1 || norm(t.name).indexOf(norm(team.name)) > -1));
+          });
+        }
+        // 1-c) 그래도 못 찾았고, 두 목록의 팀 개수가 서로 같아 1:1 대응이 명확한 경우에 한해서만
+        //      배열 순서로 최종 매칭합니다(개수가 다르면 엉뚱한 조로 잘못 매칭될 수 있으므로 시도하지 않음).
+        if(idx === -1 && typeof teamIdx === 'number' && PREP_TEAMS[teamIdx] &&
+           typeof bmTeams !== 'undefined' && bmTeams.length === PREP_TEAMS.length){
+          idx = teamIdx;
         }
         if(idx > -1){
           const leader = PREP_MEMBERS.find(function(m){ return m.teamIdx === idx && m.isLeader; });
@@ -11401,9 +11867,12 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     try{
       const data = (typeof SEAT_DATA_BY_CENTER !== 'undefined' && currentSeatCenter) ? SEAT_DATA_BY_CENTER[currentSeatCenter] : null;
       if(data && data.teams){
+        const norm2 = function(s){ return (s || '').replace(/\s+/g, '').toLowerCase(); };
+        const teamNum2 = (team && team.name && (team.name.match(/\d+/) || [])[0]) || null;
         const groupKeys = Object.keys(data.teams);
-        let matchKey = groupKeys.find(function(k){ return k === team.name; });
-        if(!matchKey) matchKey = groupKeys.find(function(k){ return team.name && (team.name.indexOf(k) > -1 || k.indexOf(team.name) > -1); });
+        let matchKey = groupKeys.find(function(k){ return norm2(k) === norm2(team.name); });
+        if(!matchKey && teamNum2) matchKey = groupKeys.find(function(k){ return (k.match(/\d+/) || [])[0] === teamNum2; });
+        if(!matchKey) matchKey = groupKeys.find(function(k){ return team.name && (norm2(team.name).indexOf(norm2(k)) > -1 || norm2(k).indexOf(norm2(team.name)) > -1); });
         if(matchKey){
           const leader = data.teams[matchKey].find(function(m){ return m.role && m.role.indexOf('팀장') > -1; });
           if(leader) return makeFaceAvatar(leader.name, leader.photo, currentSeatCenter);
@@ -11411,6 +11880,34 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       }
     } catch(err){}
     return makeFaceAvatar(team.name || 'TEAM');
+  }
+  /* '레이스 준비'(브루마블 차량 편성)는 원래 "조 1"~"조 8"이라는 고정된 8칸을 항상 만들어서,
+     '그랑프리 출격 준비'에서 실제로 확정한 조 개수/이름과 서로 어긋나 있었습니다(예: 특정 센터만
+     불러오면 조가 1~2개뿐인데도 차량은 8대가 만들어짐). 그 결과 팀장 얼굴 매칭이 실패하는 조가
+     생겼습니다. '레이스 준비'를 처음 열 때, 출격 준비에서 팀장 지정까지 확정된 상태라면 그 조
+     구성(개수·이름)을 그대로 가져와 차량 편성 폼을 다시 만들어, 조 이름이 항상 정확히 일치하도록
+     합니다. (팀장이 아직 지정되지 않았다면 기존처럼 기본 "조 1"~"조 8"을 그대로 사용합니다.) */
+  let bmTeamsSyncedFromPrep = false;
+  function syncBmTeamsFromPrepTeams(){
+    if(bmTeamsSyncedFromPrep) return false;
+    if(typeof PREP_TEAMS === 'undefined' || !PREP_TEAMS.length) return false;
+    if(typeof PREP_MEMBERS === 'undefined' || !PREP_MEMBERS.some(function(m){ return m.isLeader; })) return false;
+    const wrap = document.getElementById('bmTeamForms');
+    if(!wrap) return false;
+    bmTeamsSyncedFromPrep = true;
+    wrap.innerHTML = '';
+    bmTeams = [];
+    PREP_TEAMS.slice(0, 8).forEach(function(pt){
+      const label = pt.groupLabel || pt.name || '';
+      if(!label) return;
+      addTeam();
+      const last = bmTeams[bmTeams.length - 1];
+      if(!last) return;
+      const nameInput = document.getElementById('bmName' + last.formId);
+      if(nameInput) nameInput.value = label;
+      updateRouletteFlag(last.formId);
+    });
+    return true;
   }
   function addTeam(){
     if(bmTeams.length >= 8) return;
@@ -11430,7 +11927,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
         '<div class="bm-roulette-result" id="bmRouletteResult' + i + '" style="display:none;">' +
           '<span class="bm-roulette-flag" id="bmRouletteFlag' + i + '" style="background:' + BM_COLORS[colorIdx] + ';"></span>' +
           '<div class="bm-flagpole"></div>' +
-          '<div class="bm-roulette-car" id="bmRouletteCar' + i + '"></div>' +
+          '<div class="bm-roulette-car" id="bmRouletteCar' + i + '"><div class="bm-roulette-face" id="bmRouletteFace' + i + '"></div></div>' +
           '<button class="bm-count-btn bm-reroll-btn" onclick="spinCarRoulette(' + i + ')">↺ 다시 돌리기</button>' +
         '</div>' +
       '</div>' +
@@ -11449,6 +11946,7 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     const flag = document.getElementById('bmRouletteFlag' + formId);
     const nameInput = document.getElementById('bmName' + formId);
     if(flag && nameInput) flag.textContent = nameInput.value;
+    if(typeof updateRouletteFace === 'function') updateRouletteFace(formId);
     syncBmTeamsSnapshot();
   }
   /* 브루마블 조 편성(이름/차량)을 localStorage에 저장해, QR로 접속한 휴대폰 페이지(별도 브라우저 컨텍스트)에서도
@@ -11512,9 +12010,23 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       resultBox.style.display = 'flex';
       document.getElementById('bmRouletteCar' + formId).style.backgroundImage = 'var(' + BM_CAR_IMAGES[targetIdx] + ')';
       updateRouletteFlag(formId);
+      updateRouletteFace(formId);
       rouletteBox.classList.add('landed');
       btn.disabled = false;
     }, 2450);
+  }
+  /* 차량 룰렛이 멈추면(= 조의 차량이 확정되면), '그랑프리 출격 준비'에서 확정한 그 조의 팀장 얼굴을
+     선택된 차량 위에 작은 원형 뱃지로 표시합니다. */
+  function updateRouletteFace(formId){
+    const faceEl = document.getElementById('bmRouletteFace' + formId);
+    if(!faceEl) return;
+    const teamIdxInArr = bmTeams.findIndex(function(x){ return x.formId === formId; });
+    const t = bmTeams[teamIdxInArr];
+    if(!t) return;
+    const nameInput = document.getElementById('bmName' + formId);
+    const teamObj = Object.assign({}, t, { name: nameInput ? nameInput.value : '' });
+    const photo = resolveTeamLeaderPhoto(teamObj, teamIdxInArr);
+    faceEl.style.backgroundImage = photo ? ("url('" + photo + "')") : '';
   }
   function sfxRouletteSpin(){
     const gaps = [0.08,0.08,0.09,0.09,0.1,0.1,0.11,0.12,0.13,0.15,0.17,0.2,0.24,0.3,0.4,0.55,0.7];
@@ -15581,8 +16093,19 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
     if(highlight) highlight.classList.add('show');
     if(highlightVid){
       highlightVid.currentTime = 0;
+      // 스마트 포인터 '다음' 버튼(사용자 동작)으로 재생을 트리거하는 것이므로
+      // 소리를 켠 채로 재생을 시도합니다. 브라우저 정책으로 소리 재생이 막히는
+      // 경우에만 무음으로라도 재생되도록 대비합니다.
+      highlightVid.muted = false;
+      highlightVid.volume = 1;
       const p2 = highlightVid.play();
-      if(p2 && p2.catch){ p2.catch(function(){}); }
+      if(p2 && p2.catch){
+        p2.catch(function(){
+          highlightVid.muted = true;
+          const p3 = highlightVid.play();
+          if(p3 && p3.catch){ p3.catch(function(){}); }
+        });
+      }
     }
   }
   function stopRaceTeamVideoReveal(){
@@ -15600,9 +16123,15 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
   }
   function pauseRaceTeamVideo(){
     const highlightVid = document.getElementById('tcHighlightVideo');
-    if(highlightVid && !highlightVid.paused) highlightVid.pause();
+    if(highlightVid){
+      if(!highlightVid.paused) highlightVid.pause();
+      highlightVid.currentTime = 0;
+      highlightVid.muted = false;
+    }
     const highlight = document.getElementById('tcVideoHighlight');
     if(highlight) highlight.classList.remove('show');
+    const cols = document.getElementById('tcColumnsPrep1');
+    if(cols) cols.classList.remove('tc-hidden');
   }
   // (이전에는 배경 자동재생 영상들을 사용자가 화면을 한 번이라도 클릭/터치/키 입력하면
   // 전부 음소거 해제하는 로직이 있었으나, 파일을 열자마자/첫 클릭 시 의도치 않게
