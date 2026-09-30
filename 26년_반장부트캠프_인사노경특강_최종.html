@@ -92,8 +92,31 @@
     prevBtn.disabled = idx <= 1;
     nextBtn.disabled = idx >= TOTAL;
   }
-  function goPrev(){ if(idx > 1){ idx--; render(); } }
-  function goNext(){ if(idx < TOTAL){ idx++; render(); } }
+  function tryEnterFullscreen(){
+    if(document.fullscreenElement) return;
+    const req = document.documentElement.requestFullscreen;
+    if(req) req.call(document.documentElement).catch(function(){});
+  }
+  // 새로 열린 탭은 브라우저 정책상 그 탭 안에서 최소 한 번의 사용자 동작 전에는
+  // 자동 전체화면이 차단됩니다. 그래서 페이지가 열린 뒤 맨 처음 들어오는
+  // '다음/이전' 조작(클릭/터치/키 입력 무엇이든) 딱 한 번은 슬라이드를 넘기지
+  // 않고 전체화면 전환에만 사용하고, 1번 슬라이드에 그대로 머뭅니다.
+  // 그 다음 조작부터 정상적으로 슬라이드가 넘어갑니다.
+  let firstInteractionHandled = false;
+  function primeFullscreenGate(){
+    if(firstInteractionHandled) return false;
+    firstInteractionHandled = true;
+    tryEnterFullscreen();
+    return true;
+  }
+  function goPrev(){
+    if(primeFullscreenGate()) return;
+    if(idx > 1){ idx--; render(); }
+  }
+  function goNext(){
+    if(primeFullscreenGate()) return;
+    if(idx < TOTAL){ idx++; render(); }
+  }
   document.addEventListener('keydown', function(e){
     if(e.key === 'ArrowLeft') goPrev();
     else if(e.key === 'ArrowRight' || e.key === ' ') goNext();
@@ -102,18 +125,7 @@
     if(document.fullscreenElement) document.exitFullscreen().catch(function(){});
     window.close();
   }
-  function tryEnterFullscreen(){
-    if(document.fullscreenElement) return;
-    const req = document.documentElement.requestFullscreen;
-    if(req) req.call(document.documentElement).catch(function(){});
-  }
   tryEnterFullscreen();
-  // 새로 열린 탭은 브라우저 정책상 그 탭 안에서 최소 한 번의 사용자 동작 전에는
-  // 자동 전체화면이 차단되므로, 첫 상호작용(클릭/터치/포인터/키 입력) 종류를
-  // 모두 잡아 가장 빠른 시점에 전체화면으로 전환합니다.
-  ['pointerdown','mousedown','touchstart','keydown'].forEach(function(evt){
-    document.addEventListener(evt, tryEnterFullscreen, { once: true, capture: true });
-  });
   render();
 </script>
 </body>
