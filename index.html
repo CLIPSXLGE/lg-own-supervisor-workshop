@@ -9057,6 +9057,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     if(id === 'closing-thanks') resetThanksSequence();
     if(REVEAL_PAGES[id]) initRevealPage(id);
     if(id === 'rehearsal-detail2') ccsPptLinkStage = 0;
+    if(id === 'final') finalPromiseLinkStage = 0;
     if(id === 'ccs-quiz') ccsQuizSequenceStage = 0;
     if(prevId === 'ccs-quiz' && id !== 'ccs-quiz'){
       closeQuizPopup();
@@ -9936,6 +9937,9 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       return;
     }
     if(dir === 1 && cur === 'final-vision' && advanceFinalVisionSequenceOnNext()){
+      return;
+    }
+    if(dir === 1 && cur === 'final' && advanceFinalPromiseLinkOnNext()){
       return;
     }
     if(dir === 1 && (cur === 'lunchbreak' || (document.getElementById('suddenMissionPopupOverlay') && document.getElementById('suddenMissionPopupOverlay').classList.contains('active'))) && advanceSmSequenceOnNext()){
@@ -16354,6 +16358,17 @@ const SESSION_ROSTER_RAW = [{"s": "1차수(수도권중부/강원)", "c": "강�
       return true;
     }
     ccsPptLinkStage = 0;
+    return false;
+  }
+  let finalPromiseLinkStage = 0;
+  function advanceFinalPromiseLinkOnNext(){
+    if(finalPromiseLinkStage === 0){
+      const btn = document.getElementById('finalPromiseBadgeLink');
+      if(btn) btn.click();
+      finalPromiseLinkStage = 1;
+      return true;
+    }
+    finalPromiseLinkStage = 0;
     return false;
   }
   let ccsMission3Stage = 0;
