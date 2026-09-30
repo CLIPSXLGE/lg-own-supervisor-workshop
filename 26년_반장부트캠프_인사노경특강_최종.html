@@ -108,7 +108,12 @@
     if(req) req.call(document.documentElement).catch(function(){});
   }
   tryEnterFullscreen();
-  document.addEventListener('click', tryEnterFullscreen, { once: true });
+  // 새로 열린 탭은 브라우저 정책상 그 탭 안에서 최소 한 번의 사용자 동작 전에는
+  // 자동 전체화면이 차단되므로, 첫 상호작용(클릭/터치/포인터/키 입력) 종류를
+  // 모두 잡아 가장 빠른 시점에 전체화면으로 전환합니다.
+  ['pointerdown','mousedown','touchstart','keydown'].forEach(function(evt){
+    document.addEventListener(evt, tryEnterFullscreen, { once: true, capture: true });
+  });
   render();
 </script>
 </body>
