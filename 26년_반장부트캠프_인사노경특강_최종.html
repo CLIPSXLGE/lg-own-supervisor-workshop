@@ -65,7 +65,7 @@
 <body>
   <div class="top-bar">
     <div class="top-title">26년 반장 부트캠프 · 인사노경특강</div>
-    <button class="close-btn" onclick="window.close()" title="닫기">✕</button>
+    <button class="close-btn" onclick="closeViewer()" title="닫기">✕</button>
   </div>
   <div class="viewer">
     <div class="slide-stage">
@@ -98,6 +98,17 @@
     if(e.key === 'ArrowLeft') goPrev();
     else if(e.key === 'ArrowRight' || e.key === ' ') goNext();
   });
+  function closeViewer(){
+    if(document.fullscreenElement) document.exitFullscreen().catch(function(){});
+    window.close();
+  }
+  function tryEnterFullscreen(){
+    if(document.fullscreenElement) return;
+    const req = document.documentElement.requestFullscreen;
+    if(req) req.call(document.documentElement).catch(function(){});
+  }
+  tryEnterFullscreen();
+  document.addEventListener('click', tryEnterFullscreen, { once: true });
   render();
 </script>
 </body>
