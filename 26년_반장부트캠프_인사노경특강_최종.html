@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>26년 반장 부트캠프 인사노경특강</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background: #0b0b0d; color: #f3f4f6;
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    overflow: hidden;
+  }
+  .viewer {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slide-stage {
+    position: relative;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slide-img {
+    max-width: 94vw; max-height: 86vh;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    border-radius: 6px;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .nav-zone {
+    position: absolute; top: 0; bottom: 0; width: 35%;
+    cursor: pointer;
+  }
+  .nav-zone.prev { left: 0; }
+  .nav-zone.next { right: 0; }
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    padding: 16px 0 22px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.65), rgba(0,0,0,0));
+  }
+  .bar button {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; width: 42px; height: 42px; border-radius: 50%;
+    font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .bar button:hover { background: rgba(255,255,255,0.2); }
+  .bar button:disabled { opacity: 0.3; cursor: default; }
+  .counter { font-size: 14px; letter-spacing: 0.5px; color: #cfcfd2; min-width: 64px; text-align: center; }
+  .top-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 5;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 22px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0));
+  }
+  .top-title { font-size: 14px; font-weight: 700; color: #e5e5e7; letter-spacing: 0.3px; }
+  .close-btn {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; width: 36px; height: 36px; border-radius: 50%;
+    font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .close-btn:hover { background: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-title">26년 반장 부트캠프 · 인사노경특강</div>
+    <button class="close-btn" onclick="window.close()" title="닫기">✕</button>
+  </div>
+  <div class="viewer">
+    <div class="slide-stage">
+      <div class="nav-zone prev" onclick="goPrev()"></div>
+      <img class="slide-img" id="slideImg" src="assets/ppt-slides/slide-01.jpg" alt="슬라이드">
+      <div class="nav-zone next" onclick="goNext()"></div>
+    </div>
+  </div>
+  <div class="bar">
+    <button id="prevBtn" onclick="goPrev()">‹</button>
+    <span class="counter" id="counter">1 / 15</span>
+    <button id="nextBtn" onclick="goNext()">›</button>
+  </div>
+<script>
+  const TOTAL = 15;
+  let idx = 1;
+  const img = document.getElementById('slideImg');
+  const counter = document.getElementById('counter');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  function render(){
+    img.src = 'assets/ppt-slides/slide-' + String(idx).padStart(2,'0') + '.jpg';
+    counter.textContent = idx + ' / ' + TOTAL;
+    prevBtn.disabled = idx <= 1;
+    nextBtn.disabled = idx >= TOTAL;
+  }
+  function goPrev(){ if(idx > 1){ idx--; render(); } }
+  function goNext(){ if(idx < TOTAL){ idx++; render(); } }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowLeft') goPrev();
+    else if(e.key === 'ArrowRight' || e.key === ' ') goNext();
+  });
+  render();
+</script>
+</body>
+</html>
